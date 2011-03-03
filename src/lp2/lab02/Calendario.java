@@ -10,8 +10,7 @@ import java.util.Scanner;
  * Matricula: 21021526
  * 
  * @author jordaoesa
- * */
-
+ */
 public class Calendario {
 
 	/**
@@ -42,7 +41,7 @@ public class Calendario {
 					System.exit(0);
 					break;
 				default:
-					System.out.println("\nOpcao invalida. Digite valores no intervalo [1 <= valor <= 4].\n");
+					System.out.println("\n#####\nOpcao invalida. Digite valores no intervalo [1 <= valor <= 4].\n#####\n");
 			}
 		}while(opcao!=4);
 	}
@@ -70,9 +69,11 @@ public class Calendario {
 	 * Metodo responsavel por encontrar o dia da semana atraves da data passada pelo usuario.
 	 */
 	private static void indicaDiaSemana() {
-		GregorianCalendar calendario = new GregorianCalendar();
+		
+		final String STR_FORMATADA = "\n#####\nDia %d/%d/%d eh um(a): %s\n#####\n\n";
 		final String SEMANA[] = {"", "Domingo", "Segunda Feira","Terca Feira","Quarta Feira","Quinta Feira","Sexta Feira","Sabado"};
 		final int CONSTANTE_CORRECAO = 1;
+		GregorianCalendar calendario = new GregorianCalendar();
 		int dia, mes, ano;
 		Scanner input = new Scanner(System.in);
 		
@@ -86,23 +87,26 @@ public class Calendario {
 		calendario.clear();
 		calendario.set(ano, (mes - CONSTANTE_CORRECAO), dia);
 		
-		System.out.printf("\nDia %d/%d/%d eh um(a): %s\n\n", dia, mes, ano, SEMANA[calendario.get(Calendar.DAY_OF_WEEK)]);	
+		System.out.printf(STR_FORMATADA, dia, mes, ano, SEMANA[calendario.get(GregorianCalendar.DAY_OF_WEEK)]);	
 	}
 	
 	/**
 	 * Metodo responsavel por verificar se um dado ano passado pelo usuario eh ou nao bissext.
 	 */
 	private static void verificaAnoBissexto(){
+		
+		final String STR_FORMATADA1 = "\n#####\nO ano %d eh bissexto.\n#####\n\n", STR_FORMATADA2 = "\n#####\nO ano %d naum eh bissexto.\n#####\n\n";
 		GregorianCalendar calendario = new GregorianCalendar();
 		Scanner input = new Scanner(System.in);
 		int ano;
+		
 		System.out.print("\nInsira o ano: ");
 		ano = input.nextInt();
 		
 		if(calendario.isLeapYear(ano)){
-			System.out.printf("\nO ano %d eh bissexto.\n\n", ano);
+			System.out.printf(STR_FORMATADA1, ano);
 		}else{
-			System.out.printf("\nO ano %d naum eh bissexto.\n\n", ano);
+			System.out.printf(STR_FORMATADA2, ano);
 		}
 	}
 	
@@ -111,8 +115,10 @@ public class Calendario {
 	 */
 	private static void diasUteisMes(){
 		
-		GregorianCalendar calendario = new GregorianCalendar();
 		final int CONSTANTE_CORRECAO = 1, DIA = 1;
+		final String MESES[] = {"Janeiro","Fevereiro","Marco","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"};
+		final String STR_FORMATADA = "\n#####\nO mes de %s de %d tem %d dias uteis.\n#####\n\n";
+		GregorianCalendar calendario = new GregorianCalendar();
 		int mes, ano, diasUteis = 0, qtdDias = 0;
 		Scanner input = new Scanner(System.in);
 		
@@ -139,12 +145,13 @@ public class Calendario {
 		
 		for(int i = DIA; i <= qtdDias; i++){
 			calendario.set(ano, mes, i);
-			if(calendario.get(GregorianCalendar.DAY_OF_WEEK) != GregorianCalendar.SUNDAY && calendario.get(GregorianCalendar.DAY_OF_WEEK) != GregorianCalendar.SATURDAY){
+			if(calendario.get(GregorianCalendar.DAY_OF_WEEK) != GregorianCalendar.SUNDAY 
+					&& calendario.get(GregorianCalendar.DAY_OF_WEEK) != GregorianCalendar.SATURDAY){
 				diasUteis++;
 			}
 		}
 		
-		System.out.println("dias uteis: "+diasUteis);
+		System.out.printf(STR_FORMATADA, MESES[mes], ano, diasUteis);
 		
 	}
 
