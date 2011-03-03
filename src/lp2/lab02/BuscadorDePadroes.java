@@ -15,7 +15,7 @@ public class BuscadorDePadroes {
 		sequenciaRecebida = sequenciaRecebida.toLowerCase();
 		sequenciaRecebida = sequenciaRecebida.replace(" ", "");
 		
-		System.out.print("Informe o padrão desejado: ");
+		System.out.print("Informe o padrao desejado: ");
 		padrao = input.next();
 		
 		padrao = padrao.toLowerCase();
@@ -26,7 +26,7 @@ public class BuscadorDePadroes {
 				sequenciaRecebida = sequenciaRecebida.replaceFirst(padrao, padrao.toUpperCase());
 				numOcorrencias++;
 			}
-		if(numOcorrencias == 0) System.out.printf("ocorrências: %d\n", numOcorrencias);
-		else System.out.printf("ocorrências: %d - %s\n", numOcorrencias, sequenciaRecebida);
+		if(numOcorrencias == 0) System.out.printf("ocorrencias: %d\n", numOcorrencias);
+		else System.out.printf("ocorrencias: %d - %s\n", numOcorrencias, sequenciaRecebida);
 	}
 }

@@ -88,7 +88,7 @@ public class Calendario {
 	private static void diasUteisMes(){
 		
 		Calendar calendario = new GregorianCalendar();
-		final int CONSTANTE = -1;
+		final int CONSTANTE = 1;
 		int mes, ano, diasUteis=0;
 		Scanner input = new Scanner(System.in);
 		
@@ -97,7 +97,7 @@ public class Calendario {
 		System.out.print("Insira o ano [Ano desejado]: ");
 		ano = input.nextInt();
 		
-		mes += CONSTANTE;
+		mes -= CONSTANTE;
 		
 		calendario.set(ano, mes, 0);
 		
