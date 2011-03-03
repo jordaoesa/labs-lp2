@@ -115,6 +115,7 @@ public class Calendario {
 	private static void diasUteisMes(){
 		
 		Calendar calendario = new GregorianCalendar();
+		GregorianCalendar calendar = new GregorianCalendar();
 		final int CONSTANTE = 1;
 		int mes, ano, diasUteis=0;
 		Scanner input = new Scanner(System.in);
@@ -128,7 +129,16 @@ public class Calendario {
 		
 		calendario.set(ano, mes, 0);
 		
-		
+		if(calendar.isLeapYear(ano)){
+			if(mes+CONSTANTE == 2){
+				for(int i=1; i<=28; i++){
+					if(calendar.get(Calendar.DAY_OF_WEEK) != 0 && calendar.get(Calendar.DAY_OF_WEEK) != 6){
+						diasUteis++;
+					}
+				}
+			}
+		}
+		System.out.println(diasUteis);
 		
 	}
 
