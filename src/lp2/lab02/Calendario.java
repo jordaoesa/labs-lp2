@@ -3,8 +3,13 @@ package lp2.lab02;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
-import java.util.SimpleTimeZone;
-import java.util.TimeZone;
+
+/**
+ * Aluno: Jordao Ezequiel Serafim de Araujo
+ * Matricula: 21021526
+ * 
+ * @author jordaoesa
+ * */
 
 public class Calendario {
 
@@ -12,6 +17,14 @@ public class Calendario {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		lacoMain();
+	}
+	
+	/**
+	 * Este metodo define o laco principal do programa.
+	 */
+	
+	private static void lacoMain(){
 		int opcao=4;
 		do{
 			opcao = menuOpcoes();
@@ -32,8 +45,11 @@ public class Calendario {
 					System.out.println("\nOpcao invalida. Digite valores no intervalo [1 <= valor <= 4].\n");
 			}
 		}while(opcao!=4);
-
 	}
+	
+	/**
+	 * Este metodo mostra o menu de opcoes que o usuario pode escolher.
+	 */
 	private static int menuOpcoes(){
 		int opcao;
 		Scanner input = new Scanner(System.in);
@@ -50,6 +66,9 @@ public class Calendario {
 		return opcao;
 	}
 
+	/**
+	 * Metodo responsavel por encontrar o dia da semana atraves da data passada pelo usuario.
+	 */
 	private static void indicaDiaSemana() {
 		Calendar calendario = new GregorianCalendar();
 		final String SEMANA[] = {"Domingo", "Segunda Feira","Terca Feira","Quarta Feira","Quinta Feira","Sexta Feira","Sabado"};
@@ -72,6 +91,10 @@ public class Calendario {
 		
 		System.out.printf("\nDia %d/%d/%d eh um(a): %s\n\n", dia+CONSTANTE, mes+CONSTANTE, ano, SEMANA[calendario.get(Calendar.DAY_OF_WEEK)]);	
 	}
+	
+	/**
+	 * Metodo responsavel por verificar se um dado ano passado pelo usuario eh ou nao bissext.
+	 */
 	private static void verificaAnoBissexto(){
 		GregorianCalendar calendario = new GregorianCalendar();
 		Scanner input = new Scanner(System.in);
@@ -85,6 +108,10 @@ public class Calendario {
 			System.out.printf("\nO ano %d naum eh bissexto.\n\n", ano);
 		}
 	}
+	
+	/**
+	 * Metodo responsavel por mostar ao usuario a quantidade de dias uteis que um dado mes tem.
+	 */
 	private static void diasUteisMes(){
 		
 		Calendar calendario = new GregorianCalendar();
@@ -100,6 +127,8 @@ public class Calendario {
 		mes -= CONSTANTE;
 		
 		calendario.set(ano, mes, 0);
+		
+		
 		
 	}
 
