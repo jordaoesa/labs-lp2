@@ -50,8 +50,6 @@ public class Calendario {
 	 * Este metodo mostra o menu de opcoes que o usuario pode escolher.
 	 */
 	private static int menuOpcoes(){
-		int opcao;
-		Scanner input = new Scanner(System.in);
 		
 		System.out.println("#### MENU #########################");
 		System.out.println("#1 - Dia da semana.               #");
@@ -60,9 +58,10 @@ public class Calendario {
 		System.out.println("#4 - Sair                         #");
 		System.out.println("###################################");
 		System.out.print("Opcao: ");
-		opcao = input.nextInt();
 		
-		return opcao;
+		return (new Scanner(System.in)).nextInt();
+		
+		//return recebeInteiro( (new Scanner(System.in)).next() );
 	}
 
 	/**
@@ -154,5 +153,21 @@ public class Calendario {
 		System.out.printf(STR_FORMATADA, MESES[mes], ano, diasUteis);
 		
 	}
+	
+//	private static int recebeInteiro(String valor){
+//		int cont = 0;
+//		for(int i=0; i<valor.length(); i++){
+//			if(valor.charAt(i) < 48 || valor.charAt(i) > 57){
+//				cont++;
+//			}
+//		}
+//		if(cont!=0){
+//			System.out.print("Digita denovo: ");
+//			valor = (new Scanner(System.in)).next();
+//			recebeInteiro(valor);
+//		}
+//		System.out.println(valor);
+//		return Integer.parseInt(valor);
+//	}
 
 }
