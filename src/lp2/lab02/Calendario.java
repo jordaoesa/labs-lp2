@@ -1,107 +1,106 @@
 package lp2.lab02;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 import java.util.SimpleTimeZone;
 import java.util.TimeZone;
+
 public class Calendario {
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
-		Scanner input = new Scanner(System.in);
-		Calendar calendario = new GregorianCalendar();
-		
+		int opcao=4;
+		do{
+			opcao = menuOpcoes();
+			switch (opcao) {
+				case 1:
+					indicaDiaSemana();
+					break;
+				case 2:
+					verificaAnoBissexto();
+					break;
+				case 3:
+					diasUteisMes();
+					break;
+				case 4:
+					System.exit(0);
+					break;
+				default:
+					System.out.println("\nOpcao invalida. Digite valores no intervalo [1 <= valor <= 4].\n");
+			}
+		}while(opcao!=4);
 
-		 // get the supported ids for GMT-08:00 (Pacific Standard Time)
-		 String[] ids = TimeZone.getAvailableIDs(-8 * 60 * 60 * 1000);
-		 // if no ids were returned, something is wrong. get out.
-		 if (ids.length == 0)
-		     System.exit(0);
-
-		  // begin output
-		 System.out.println("Current Time");
-
-		 // create a Pacific Standard Time time zone
-		 SimpleTimeZone pdt = new SimpleTimeZone(-8 * 60 * 60 * 1000, ids[0]);
-
-		 // set up rules for daylight savings time
-		 pdt.setStartRule(Calendar.APRIL, 1, Calendar.SUNDAY, 2 * 60 * 60 * 1000);
-		 pdt.setEndRule(Calendar.OCTOBER, -1, Calendar.SUNDAY, 2 * 60 * 60 * 1000);
-
-		 // create a GregorianCalendar with the Pacific Daylight time zone
-		 // and the current date and time
-		 Calendar calendar = new GregorianCalendar(pdt);
-
-
-
-		 // print out a bunch of interesting things
-		 System.out.println("ERA: " + calendar.get(Calendar.ERA));
-		 System.out.println("YEAR: " + calendar.get(Calendar.YEAR));
-		 System.out.println("MONTH: " + calendar.get(Calendar.MONTH));
-		 System.out.println("WEEK_OF_YEAR: " + calendar.get(Calendar.WEEK_OF_YEAR));
-		 System.out.println("WEEK_OF_MONTH: " + calendar.get(Calendar.WEEK_OF_MONTH));
-		 System.out.println("DATE: " + calendar.get(Calendar.DATE));
-		 System.out.println("DAY_OF_MONTH: " + calendar.get(Calendar.DAY_OF_MONTH));
-		 System.out.println("DAY_OF_YEAR: " + calendar.get(Calendar.DAY_OF_YEAR));
-		 System.out.println("DAY_OF_WEEK: " + calendar.get(Calendar.DAY_OF_WEEK));
-		 System.out.println("DAY_OF_WEEK_IN_MONTH: "
-		                    + calendar.get(Calendar.DAY_OF_WEEK_IN_MONTH));
-		 System.out.println("AM_PM: " + calendar.get(Calendar.AM_PM));
-		 System.out.println("HOUR: " + calendar.get(Calendar.HOUR));
-		 System.out.println("HOUR_OF_DAY: " + calendar.get(Calendar.HOUR_OF_DAY));
-		 System.out.println("MINUTE: " + calendar.get(Calendar.MINUTE));
-		 System.out.println("SECOND: " + calendar.get(Calendar.SECOND));
-		 System.out.println("MILLISECOND: " + calendar.get(Calendar.MILLISECOND));
-		 System.out.println("ZONE_OFFSET: "
-		                    + (calendar.get(Calendar.ZONE_OFFSET)/(60*60*1000)));
-		 System.out.println("DST_OFFSET: "
-		                    + (calendar.get(Calendar.DST_OFFSET)/(60*60*1000)));
-
-		 System.out.println("Current Time, with hour reset to 3");
-		 calendar.clear(Calendar.HOUR_OF_DAY); // so doesn't override
-		 calendar.set(Calendar.HOUR, 3);
-		 System.out.println("ERA: " + calendar.get(Calendar.ERA));
-		 System.out.println("YEAR: " + calendar.get(Calendar.YEAR));
-		 System.out.println("MONTH: " + calendar.get(Calendar.MONTH));
-		 System.out.println("WEEK_OF_YEAR: " + calendar.get(Calendar.WEEK_OF_YEAR));
-		 System.out.println("WEEK_OF_MONTH: " + calendar.get(Calendar.WEEK_OF_MONTH));
-		 System.out.println("DATE: " + calendar.get(Calendar.DATE));
-		 System.out.println("DAY_OF_MONTH: " + calendar.get(Calendar.DAY_OF_MONTH));
-		 System.out.println("DAY_OF_YEAR: " + calendar.get(Calendar.DAY_OF_YEAR));
-		 System.out.println("DAY_OF_WEEK: " + calendar.get(Calendar.DAY_OF_WEEK));
-		 System.out.println("DAY_OF_WEEK_IN_MONTH: "
-		                    + calendar.get(Calendar.DAY_OF_WEEK_IN_MONTH));
-		 System.out.println("AM_PM: " + calendar.get(Calendar.AM_PM));
-		 System.out.println("HOUR: " + calendar.get(Calendar.HOUR));
-		 System.out.println("HOUR_OF_DAY: " + calendar.get(Calendar.HOUR_OF_DAY));
-		 System.out.println("MINUTE: " + calendar.get(Calendar.MINUTE));
-		 System.out.println("SECOND: " + calendar.get(Calendar.SECOND));
-		 System.out.println("MILLISECOND: " + calendar.get(Calendar.MILLISECOND));
-		 System.out.println("ZONE_OFFSET: "
-		        + (calendar.get(Calendar.ZONE_OFFSET)/(60*60*1000))); // in hours
-		 System.out.println("DST_OFFSET: "
-		        + (calendar.get(Calendar.DST_OFFSET)/(60*60*1000))); // in hours
-
-		 
-	
-		
 	}
-	
-	private static int[] menu1(){
-		int diaMesAno[] = new int[3];
+	private static int menuOpcoes(){
+		int opcao;
 		Scanner input = new Scanner(System.in);
 		
-		System.out.print("Insira o dia: ");
-		diaMesAno[0] = input.nextInt();
-		System.out.print("Insira o mes: ");
-		diaMesAno[1] = input.nextInt();
-		System.out.print("Insira o ano: ");
-		diaMesAno[2] = input.nextInt();
+		System.out.println("#### MENU #########################");
+		System.out.println("#1 - Dia da semana.               #");
+		System.out.println("#2 - Ano bissexto.                #");
+		System.out.println("#3 - Quantos dias uteis tem o mes.#");
+		System.out.println("#4 - Sair                         #");
+		System.out.println("###################################");
+		System.out.print("Opcao: ");
+		opcao = input.nextInt();
 		
-		return diaMesAno;
+		return opcao;
+	}
+
+	private static void indicaDiaSemana() {
+		Calendar calendario = new GregorianCalendar();
+		final String SEMANA[] = {"Domingo", "Segunda Feira","Terca Feira","Quarta Feira","Quinta Feira","Sexta Feira","Sabado"};
+		final int CONSTANTE = 1;
+		int dia, mes, ano;
+		Scanner input = new Scanner(System.in);
+		
+		System.out.print("\nInsira o dia [1 a 31]: ");
+		dia = input.nextInt();
+		System.out.print("Insira o mes [1=Janeiro, ..., 12=Dezembro]: ");
+		mes = input.nextInt();
+		System.out.print("Insira o ano [Ano desejado]: ");
+		ano = input.nextInt();
+		
+		dia -= CONSTANTE;
+		mes -= CONSTANTE;
+		
+		calendario.clear();
+		calendario.set(ano, mes, dia);
+		
+		System.out.printf("\nDia %d/%d/%d eh um(a): %s\n\n", dia+CONSTANTE, mes+CONSTANTE, ano, SEMANA[calendario.get(Calendar.DAY_OF_WEEK)]);	
+	}
+	private static void verificaAnoBissexto(){
+		GregorianCalendar calendario = new GregorianCalendar();
+		Scanner input = new Scanner(System.in);
+		int ano;
+		System.out.print("\nInsira o ano: ");
+		ano = input.nextInt();
+		
+		if(calendario.isLeapYear(ano)){
+			System.out.printf("\nO ano %d eh bissexto.\n\n", ano);
+		}else{
+			System.out.printf("\nO ano %d naum eh bissexto.\n\n", ano);
+		}
+	}
+	private static void diasUteisMes(){
+		
+		Calendar calendario = new GregorianCalendar();
+		final int CONSTANTE = -1;
+		int mes, ano, diasUteis=0;
+		Scanner input = new Scanner(System.in);
+		
+		System.out.print("\nInsira o mes [1=Janeiro, ..., 12=Dezembro]: ");
+		mes = input.nextInt();
+		System.out.print("Insira o ano [Ano desejado]: ");
+		ano = input.nextInt();
+		
+		mes += CONSTANTE;
+		
+		calendario.set(ano, mes, 0);
+		
 	}
 
 }
