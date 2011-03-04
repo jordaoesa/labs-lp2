@@ -1,7 +1,5 @@
 package lp2.lab02;
 
-import java.io.ObjectInputStream.GetField;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 
