@@ -6,8 +6,14 @@ import java.util.Scanner;
 /**
  * Aluno: Jordao Ezequiel Serafim de Araujo
  * Matricula: 21021526
+ * Aluno: Marcelo Avelino Xavier
+ * Matricula: 21115291
+ * Aluno: Felipe Brasileiro Barbosa
+ * Matricula: 21021067
  * 
  * @author jordaoesa
+ * @author marceloax
+ * @author felipebb
  */
 public class Calendario {
 
