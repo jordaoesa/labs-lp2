@@ -37,11 +37,8 @@ public class Calendario {
 				case 3:
 					diasUteisMes();
 					break;
-				case 4:
-					System.exit(0);
-					break;
 				default:
-					System.out.println("\n#####\nOpcao invalida. Digite valores no intervalo [1 <= valor <= 4].\n#####\n");
+					// naum faca nada
 			}
 		}while(opcao!=4);
 	}
@@ -50,6 +47,8 @@ public class Calendario {
 	 * Este metodo mostra o menu de opcoes que o usuario pode escolher.
 	 */
 	private static int menuOpcoes(){
+		final int VALOR_MINIMO = 1;
+		final int VALOR_MAXIMO = 4;
 		
 		System.out.println("#### MENU #########################");
 		System.out.println("#1 - Dia da semana.               #");
@@ -57,11 +56,8 @@ public class Calendario {
 		System.out.println("#3 - Quantos dias uteis tem o mes.#");
 		System.out.println("#4 - Sair                         #");
 		System.out.println("###################################");
-		System.out.print("Opcao: ");
 		
-		return (new Scanner(System.in)).nextInt();
-		
-		//return recebeInteiro( (new Scanner(System.in)).next() );
+		return recebeInteiro(VALOR_MINIMO, VALOR_MAXIMO);
 	}
 
 	/**
@@ -74,14 +70,13 @@ public class Calendario {
 		final int CONSTANTE_CORRECAO = 1;
 		GregorianCalendar calendario = new GregorianCalendar();
 		int dia, mes, ano;
-		Scanner input = new Scanner(System.in);
 		
-		System.out.print("\nInsira o dia [1 a 31]: ");
-		dia = input.nextInt();
-		System.out.print("Insira o mes [1 a 12]: ");
-		mes = input.nextInt();
-		System.out.print("Insira o ano [ano desejado]: ");
-		ano = input.nextInt();
+		System.out.print("\nInsira o dia [1 a 31] ");
+		dia = recebeInteiro(calendario.getMinimum(calendario.DAY_OF_MONTH), calendario.getMaximum(calendario.DAY_OF_MONTH));
+		System.out.print("Insira o mes [1 a 12] ");
+		mes = recebeInteiro( (calendario.getMinimum(calendario.MONTH) + CONSTANTE_CORRECAO) , (calendario.getMaximum(calendario.MONTH) + CONSTANTE_CORRECAO) );
+		System.out.print("Insira o ano [ano desejado] ");
+		ano = recebeInteiro(calendario.getMinimum(calendario.YEAR), calendario.getMaximum(calendario.YEAR));
 		
 		calendario.clear();
 		calendario.set(ano, (mes - CONSTANTE_CORRECAO), dia);
@@ -99,8 +94,8 @@ public class Calendario {
 		Scanner input = new Scanner(System.in);
 		int ano;
 		
-		System.out.print("\nInsira o ano: ");
-		ano = input.nextInt();
+		System.out.print("\nInsira o ano ");
+		ano = recebeInteiro(calendario.getMinimum(calendario.YEAR), calendario.getMaximum(calendario.YEAR));
 		
 		if(calendario.isLeapYear(ano)){
 			System.out.printf(STR_FORMATADA1, ano);
@@ -119,12 +114,11 @@ public class Calendario {
 		final String STR_FORMATADA = "\n#####\nO mes de %s de %d tem %d dias uteis.\n#####\n\n";
 		GregorianCalendar calendario = new GregorianCalendar();
 		int mes, ano, diasUteis = 0, qtdDias = 0;
-		Scanner input = new Scanner(System.in);
 		
-		System.out.print("\nInsira o mes [1 a 12]: ");
-		mes = input.nextInt();
-		System.out.print("Insira o ano [ano desejado]: ");
-		ano = input.nextInt();
+		System.out.print("\nInsira o mes [1 a 12] ");
+		mes = recebeInteiro( (calendario.getMinimum(calendario.MONTH) + CONSTANTE_CORRECAO) , (calendario.getMaximum(calendario.MONTH) + CONSTANTE_CORRECAO) );
+		System.out.print("Insira o ano [ano desejado] ");
+		ano = recebeInteiro(calendario.getMinimum(calendario.YEAR), calendario.getMaximum(calendario.YEAR));
 		
 		mes -= CONSTANTE_CORRECAO;
 		
@@ -154,20 +148,29 @@ public class Calendario {
 		
 	}
 	
-//	private static int recebeInteiro(String valor){
-//		int cont = 0;
-//		for(int i=0; i<valor.length(); i++){
-//			if(valor.charAt(i) < 48 || valor.charAt(i) > 57){
-//				cont++;
-//			}
-//		}
-//		if(cont!=0){
-//			System.out.print("Digita denovo: ");
-//			valor = (new Scanner(System.in)).next();
-//			recebeInteiro(valor);
-//		}
-//		System.out.println(valor);
-//		return Integer.parseInt(valor);
-//	}
+	/**
+	 * Este metodo eh responsavel pelo tratamento de erros na entrada dos valores.
+	 * Sao passados dois valores inteiros que representam o valor minimo que pode
+	 * ser recebido e o valor maximo que pode ser recebido.
+	 * 
+	 * @param menorValor
+	 * @param maiorValor
+	 */
+	private static int recebeInteiro(int menorValor, int maiorValor){
+		while (true){
+			try{
+				String valor;
+				int numero;
+				do{
+					System.out.print(">>> ");
+					valor = (new Scanner(System.in)).nextLine();
+					numero = Integer.parseInt(valor);
+				}while(numero < menorValor || numero > maiorValor);
+				return numero;
+			}catch(NumberFormatException num){
+				// naum faca nada
+			}
+		}
+	}
 
 }
