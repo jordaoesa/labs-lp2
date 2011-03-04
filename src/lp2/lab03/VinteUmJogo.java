@@ -10,19 +10,39 @@ import java.util.Scanner;
  * @author jordaoesa
  */
 public class VinteUmJogo {
-
+	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		startGame();
+		while(true){
+			menu();
+		}
 
 	}
 	static boolean verificaJogador = true;
 	static boolean verificaMesa = true;
 
+	private static void menu(){
+		verificaJogador = true;
+		verificaMesa = true;
+		String opcao;
+		System.out.println("\n# MENU ###############");
+		System.out.println("# 1 - Jogar          #");
+		System.out.println("# outra opcao - Sair #");
+		System.out.println("######################");
+		System.out.print(">>> ");
+		opcao = (new Scanner(System.in)).nextLine();
+		
+		if(opcao.equals("1")){
+			startGame();
+		} else{
+			System.exit(0);
+		}
+		
+	}
+	
 	private static void startGame() {
-		//boolean verifica = true;
 		
 		Baralho baralho = new Baralho();
 		baralho.baralhar();
@@ -47,31 +67,15 @@ public class VinteUmJogo {
 				adicionarCartasMesa(maoMesa, baralho);
 			}
 			
-			if(maoJogador.valor() > 21){
+			if(maoJogador.valor() > 21 || maoMesa.valor() == 21){
 				System.out.println("Mesa Ganhou!!!!!!\n");
 				System.out.printf("Mao do Jogador: %s\n", maoJogador.toString());
 				System.out.printf("Pontos do Jogador: %d\n", maoJogador.valor());
 				System.out.printf("Mao da Mesa: %s\n", maoMesa.toString());
 				System.out.printf("Pontos da Mesa: %d\n", maoMesa.valor());
 				break;
-			}else if(maoMesa.valor() > 21){
+			}else if(maoMesa.valor() > 21 || maoJogador.valor() == 21){
 				System.out.println("Jogador Ganhou!!!!!!\n");
-				System.out.printf("Mao do Jogador: %s\n", maoJogador.toString());
-				System.out.printf("Pontos do Jogador: %d\n", maoJogador.valor());
-				System.out.printf("Mao da Mesa: %s\n", maoMesa.toString());
-				System.out.printf("Pontos da Mesa: %d\n", maoMesa.valor());
-				break;
-			}
-			
-			if(maoJogador.valor() == 21){
-				System.out.println("Jogador Ganhou!!!!!!\n");
-				System.out.printf("Mao do Jogador: %s\n", maoJogador.toString());
-				System.out.printf("Pontos do Jogador: %d\n", maoJogador.valor());
-				System.out.printf("Mao da Mesa: %s\n", maoMesa.toString());
-				System.out.printf("Pontos da Mesa: %d\n", maoMesa.valor());
-				break;
-			}else if(maoMesa.valor() == 21){
-				System.out.println("Mesa Ganhou!!!!!!\n");
 				System.out.printf("Mao do Jogador: %s\n", maoJogador.toString());
 				System.out.printf("Pontos do Jogador: %d\n", maoJogador.valor());
 				System.out.printf("Mao da Mesa: %s\n", maoMesa.toString());
@@ -86,31 +90,25 @@ public class VinteUmJogo {
 					System.out.printf("Pontos do Jogador: %d\n", maoJogador.valor());
 					System.out.printf("Mao da Mesa: %s\n", maoMesa.toString());
 					System.out.printf("Pontos da Mesa: %d\n", maoMesa.valor());
-				}else if(maoMesa.valor() > maoJogador.valor()){
+					break;
+				}else if(maoMesa.valor() > maoJogador.valor() || maoJogador.valor() == maoMesa.valor()){
 					System.out.println("Mesa Ganhou!!!!!\n");
 					System.out.printf("Mao do Jogador: %s\n", maoJogador.toString());
 					System.out.printf("Pontos do Jogador: %d\n", maoJogador.valor());
 					System.out.printf("Mao da Mesa: %s\n", maoMesa.toString());
 					System.out.printf("Pontos da Mesa: %d\n", maoMesa.valor());
-				}else if(maoJogador.valor() == maoMesa.valor()){
-					System.out.println("Mesa Ganhou!!!!!\n");
-					System.out.printf("Mao do Jogador: %s\n", maoJogador.toString());
-					System.out.printf("Pontos do Jogador: %d\n", maoJogador.valor());
-					System.out.printf("Mao da Mesa: %s\n", maoMesa.toString());
-					System.out.printf("Pontos da Mesa: %d\n", maoMesa.valor());
+					break;
 				}
-			}
-
-			
+			}	
 		}
 	}
 	
 	private static void adicionarCartasJogador(Mao mao, Baralho baralho){
 		String opcao;
-		System.out.println("#Deseja pegar uma carta?######");
-		System.out.println("# 1 - sim                    #");
-		System.out.println("# 2 - parei por aqui         #");
-		System.out.println("# outra opcao - passar a vez #");
+		System.out.println("# Deseja pegar uma carta? ####");
+		System.out.println("# 1 - Sim                    #");
+		System.out.println("# 2 - Parei por aqui         #");
+		System.out.println("# outra opcao - Passar a vez #");
 		System.out.println("##############################");
 		System.out.print(">>> ");
 		opcao = (new Scanner(System.in)).nextLine();
