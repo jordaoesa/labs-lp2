@@ -93,6 +93,7 @@ public class VinteUmJogo {
 		if(opcao.equals("1")){
 			if(baralho.númeroDeCartas() > 0){
 				mao.adicionar(baralho.pegaCarta());
+				System.out.println("Jogador pegou uma carta.");
 			}else{
 				System.out.println("Nao ha mais cartas no baralho.");
 				verificaJogador = false;
@@ -115,6 +116,7 @@ public class VinteUmJogo {
 		if (baralho.númeroDeCartas() > 0){
 			if (mao.valor() < 17){
 				mao.adicionar(baralho.pegaCarta());
+				System.out.println("Mesa pegou uma carta.");
 			}else{
 				System.out.println("Mesa nao quer mais cartas.");
 				verificaMesa = false;
@@ -159,11 +161,11 @@ public class VinteUmJogo {
 				System.out.printf("Mao da Mesa: %s\n", maoMesa.toString());
 				System.out.printf("Pontos da Mesa: %d\n", maoMesa.valor());
 				if(maoJogador.valor() > 21){
-					System.out.println("\n##Situacao do Jogo: Mao do Jogador Estourou.##\n");
+					System.out.println("##Situacao do Jogo: Mao do Jogador Estourou.##\n");
 				}else if(maoMesa.valor() == 21){
-					System.out.println("\n##Situacao do Jogo: Mesa atingiu 21 pontos.##\n");
+					System.out.println("##Situacao do Jogo: Mesa atingiu 21 pontos.##\n");
 				}else if(maoMesa.valor() == maoJogador.valor()){
-					System.out.println("\n##Situacao do Jogo: EMPATE.##\n");
+					System.out.println("##Situacao do Jogo: EMPATE.##\n");
 				}
 				break;
 			}else if(maoMesa.valor() > 21 || maoJogador.valor() == 21){
@@ -175,9 +177,9 @@ public class VinteUmJogo {
 				if(maoMesa.valor() > 21){
 					System.out.println("\n##Situacao do Jogo: Mao da Mesa Estourou.##\n");
 				}else if(maoJogador.valor() == 21){
-					System.out.println("\n##Situacao do Jogo: Jogador atingiu 21 pontos.##\n");
+					System.out.println("##Situacao do Jogo: Jogador atingiu 21 pontos.##\n");
 				}else if(maoMesa.valor() == maoJogador.valor()){
-					System.out.println("\n##Situacao do Jogo: EMPATE.##\n");
+					System.out.println("##Situacao do Jogo: EMPATE.##\n");
 				}
 				break;
 			}
@@ -189,7 +191,7 @@ public class VinteUmJogo {
 					System.out.printf("Mao do Jogador: %s\n", maoJogador.toString());
 					System.out.printf("Pontos do Jogador: %d\n", maoJogador.valor());
 					System.out.printf("Mao da Mesa: %s\n", maoMesa.toString());
-					System.out.printf("Pontos da Mesa: %d\n\n", maoMesa.valor());
+					System.out.printf("Pontos da Mesa: %d\n", maoMesa.valor());
 					System.out.println("##Situacao do Jogo: Jogador tem mais pontos que a Mesa.##\n");
 					break;
 				}else if(maoMesa.valor() > maoJogador.valor() || maoJogador.valor() == maoMesa.valor()){
@@ -197,8 +199,12 @@ public class VinteUmJogo {
 					System.out.printf("Mao do Jogador: %s\n", maoJogador.toString());
 					System.out.printf("Pontos do Jogador: %d\n", maoJogador.valor());
 					System.out.printf("Mao da Mesa: %s\n", maoMesa.toString());
-					System.out.printf("Pontos da Mesa: %d\n\n", maoMesa.valor());
-					System.out.println("##Situacao do Jogo: Mesa tem mais pontos ou mesma quantidade de pontos do Jogador.##\n");
+					System.out.printf("Pontos da Mesa: %d\n", maoMesa.valor());
+					if(maoMesa.valor() > maoJogador.valor()){
+						System.out.println("##Situacao do Jogo: Mesa tem mais pontos que o Jogador.##\n");
+					}else if(maoJogador.valor() == maoMesa.valor()){
+						System.out.println("##Situacao do Jogo: EMPATE.##\n");
+					}
 					break;
 				}
 			}
