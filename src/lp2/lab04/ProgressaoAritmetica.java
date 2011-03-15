@@ -3,6 +3,8 @@ package lp2.lab04;
 /**
  * Aluno: Jordao Ezequiel Serafim de Araujo 
  * Matricula: 21021526
+ * 
+ * @author jordaoesa
  */
 public class ProgressaoAritmetica {
 
