@@ -184,12 +184,12 @@ public class TestaProgressaoGeometrica {
 			proximo3 *= 5;
 
 			Assert.assertEquals(
-					"Erro no metodo testProximo, Progressao(25,-4), " + (i + 1)
+					"Erro no metodo proximo, Progressao(25,-4), " + (i + 1)
 							+ "chamada(s)", proximo1, pg1.proximo());
-			Assert.assertEquals("Erro no metodo testProximo, Progressao(0,0), "
+			Assert.assertEquals("Erro no metodo proximo, Progressao(0,0), "
 					+ (i + 1) + " chamada(s)", proximo2, pg2.proximo());
 			Assert.assertEquals(
-					"Erro no metodo testProximo, Progressao(-25,4), " + (i + 1)
+					"Erro no metodo proximo, Progressao(-25,4), " + (i + 1)
 							+ " chamada(s)", proximo3, pg3.proximo());
 		}
 	}
