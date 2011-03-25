@@ -25,7 +25,7 @@ public class Playlist {
 	 * @param autor
 	 *            Nome do autor da playlist.
 	 * @param tamanho
-	 *            Ttamanho da playlist.
+	 *            Tamanho da playlist.
 	 */
 	public Playlist(String nome, String autor, int tamanho) {
 		this.nome = nome;
@@ -79,7 +79,7 @@ public class Playlist {
 	}
 
 	/**
-	 * Metodo por definir ou redefinir a musica preferida pelo autor n playlist.
+	 * Metodo por definir ou redefinir a musica preferida pelo autor da playlist.
 	 * Caso a musica ja esteja inserida na playlist este metodo apenas modifica
 	 * o valor da musica preferida, caso contrario, ele insere a musica
 	 * preferida na playlist e modifica o valor da musica preferida.
