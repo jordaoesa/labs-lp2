@@ -91,7 +91,7 @@ public class VinteUmJogo {
 		System.out.print(">>> ");
 		opcao = (new Scanner(System.in)).nextLine();
 		if(opcao.equals("1")){
-			if(baralho.númeroDeCartas() > 0){
+			if(baralho.nÃºmeroDeCartas() > 0){
 				mao.adicionar(baralho.pegaCarta());
 				System.out.println("Jogador pegou uma carta.");
 			}else{
@@ -113,7 +113,7 @@ public class VinteUmJogo {
 	 * @param baralho Este eh o baralho que eh utilizado para dar cartas tanto a mesa quanto ao jogador.
 	 */
 	private static void adicionarCartasMesa(Mao mao, Baralho baralho){
-		if (baralho.númeroDeCartas() > 0){
+		if (baralho.nÃºmeroDeCartas() > 0){
 			if (mao.valor() < 17){
 				mao.adicionar(baralho.pegaCarta());
 				System.out.println("Mesa pegou uma carta.");
@@ -145,7 +145,7 @@ public class VinteUmJogo {
 			
 			System.out.printf("Mao do Jogador: %s\n", maoJogador.toString());
 			System.out.printf("Pontos do Jogador: %d\n", maoJogador.valor());
-			System.out.printf("Quantidade de cartas da Mesa: %s\n\n", maoMesa.númeroDeCartas());
+			System.out.printf("Quantidade de cartas da Mesa: %s\n\n", maoMesa.nÃºmeroDeCartas());
 			
 			if(verificaJogador){
 				adicionarCartasJogador(maoJogador, baralho);
@@ -209,8 +209,8 @@ public class VinteUmJogo {
 				}
 			}
 		}
-		System.out.printf("QUANTIDADE DE CARTAS NO BARALHO: %d\n", baralho.númeroDeCartas());
-		if(baralho.númeroDeCartas() >= 2){
+		System.out.printf("QUANTIDADE DE CARTAS NO BARALHO: %d\n", baralho.nÃºmeroDeCartas());
+		if(baralho.nÃºmeroDeCartas() >= 2){
 			continuarJogando(baralho);
 		}else{
 			System.out.println("\n### QUANTIDADE DE CARTAS INSUFICIENTE PARA JOGAR. ###\n");
