@@ -124,9 +124,9 @@ public class PlaylistDinamica {
 	 *             zero.
 	 */
 	public void adicionaMusica(String musica, int posicao) throws Exception {
-		if (posicao < 0)
+		if (posicao < 0 || posicao > musicas.size())
 			throw new Exception(
-					"Posicao invalida. Insira valores maiores que ou iguais a zero.");
+					"Posicao invalida. Insira valores dentro da quantidade de musicas na playlist.");
 		musicas.add(posicao, musica);
 	}
 
@@ -136,7 +136,7 @@ public class PlaylistDinamica {
 	 * @return
 	 */
 	public String pesquisaMusica(int posicao) {
-		if (posicao < 0)
+		if (posicao < 0 || posicao > musicas.size())
 			return null;
 		return musicas.get(posicao);
 	}
@@ -186,12 +186,15 @@ public class PlaylistDinamica {
 	 * @return
 	 */
 	public String toString() {
-		String strMusicas = "";
+		String strMusicas = "[";
 		for (int i = 0; i < musicas.size(); i++) {
-			strMusicas += musicas.get(i) + " ";
+			strMusicas += musicas.get(i) + ", ";
 		}
+		if(strMusicas.length() > 1)
+			strMusicas = strMusicas.substring(0, strMusicas.length()-2);
+		strMusicas+="]";
 		return "Autor: " + autor + ", Nome: " + nome + ", Preferida: "
-				+ preferida + "Musicas: " + strMusicas;
+				+ preferida + ", Musicas: " + strMusicas;
 	}
 
 	/**
