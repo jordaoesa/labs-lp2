@@ -131,9 +131,12 @@ public class PlaylistDinamica {
 	}
 
 	/**
+	 * Metodo responsavel por pesquisar musicas na playlistDinamica a partir de
+	 * uma posicao passada como parametro e retorna-la.
 	 * 
 	 * @param posicao
-	 * @return
+	 *            A posicao da musica procurada.
+	 * @return Retorna a musica caso ela seja encontrada e null caso contrario.
 	 */
 	public String pesquisaMusica(int posicao) {
 		if (posicao < 0 || posicao > musicas.size())
@@ -142,9 +145,12 @@ public class PlaylistDinamica {
 	}
 
 	/**
+	 * Metodo responsavel por pesquisar musicas na playlistDinamica a partir do
+	 * nome da musica pasado como parametro e retorna-la.
 	 * 
 	 * @param chave
-	 * @return
+	 *            O nome da musica a ser pesquisada.
+	 * @return Retorna a musica caso ela seja encontrada e null caso contrario.
 	 */
 	public String pesquisaMusica(String chave) {
 		if (!musicas.contains(chave))
@@ -153,18 +159,25 @@ public class PlaylistDinamica {
 	}
 
 	/**
+	 * Metodo responsavel por procurar uma musica na playlistDinamica.
 	 * 
 	 * @param chave
-	 * @return
+	 *            A musica a ser procurada na playlistDinamica.
+	 * @return Retorna true caso a musica seja encontrada e false caso
+	 *         contrario.
 	 */
 	public boolean contemMusica(String chave) {
 		return musicas.contains(chave);
 	}
 
 	/**
+	 * Metodo responsavel por remover uma musica da playlistDinamica que eh
+	 * passada como parametro.
 	 * 
 	 * @param musica
-	 * @return
+	 *            A musica a ser removida da playlistDinamica.
+	 * @return Retorna a musica caso ela seja encontrada e removida da
+	 *         playlistDinamica ou null caso contrario.
 	 */
 	public String removeMusica(String musica) {
 		if (!musicas.contains(musica))
@@ -174,32 +187,37 @@ public class PlaylistDinamica {
 	}
 
 	/**
+	 * Metodo responsavel por expor o numero de musicas na playlistDinamica.
 	 * 
-	 * @return
+	 * @return O numero de musicas da playlistDinamica.
 	 */
 	public int numeroDeMusicas() {
 		return musicas.size();
 	}
 
 	/**
+	 * Metodo toString() da playlistDinamica.
 	 * 
-	 * @return
+	 * @return Uma String com nome do Autor, Nome da playlist, musica Preferida
+	 *         e todas as Musicas.
 	 */
 	public String toString() {
 		String strMusicas = "[";
 		for (int i = 0; i < musicas.size(); i++) {
 			strMusicas += musicas.get(i) + ", ";
 		}
-		if(strMusicas.length() > 1)
-			strMusicas = strMusicas.substring(0, strMusicas.length()-2);
-		strMusicas+="]";
+		if (strMusicas.length() > 1)
+			strMusicas = strMusicas.substring(0, strMusicas.length() - 2);
+		strMusicas += "]";
 		return "Autor: " + autor + ", Nome: " + nome + ", Preferida: "
 				+ preferida + ", Musicas: " + strMusicas;
 	}
 
 	/**
+	 * Metodo responsavel por comparar duas playlistsDinamicas.
 	 * 
-	 * @return
+	 * @return Retorna true caso as playlistsDinamicas sejam iguais e false caso
+	 *         contrario.
 	 */
 	public boolean equals(Object outraPlaylist) {
 		if (!(outraPlaylist instanceof PlaylistDinamica)) {
