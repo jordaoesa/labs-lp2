@@ -140,7 +140,7 @@ public class PlaylistDinamica {
 	 * @return Retorna a musica caso ela seja encontrada e null caso contrario.
 	 */
 	public String pesquisaMusica(int posicao) {
-		if (posicao < 0 || posicao > musicas.size())
+		if (posicao < 0 || posicao > musicas.size() || musicas.size() == 0)
 			return null;
 		return musicas.get(posicao);
 	}
