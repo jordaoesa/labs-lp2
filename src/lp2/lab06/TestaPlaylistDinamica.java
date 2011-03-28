@@ -121,6 +121,7 @@ public class TestaPlaylistDinamica {
 
 	@Test
 	public void testaAdicionaMusica() throws Exception {
+		
 		// adicionaMusica(String musica) playlistDinamica 1
 		Assert.assertTrue("Erro em adicionaMusica playlistDinamica 1",
 				p1.adicionaMusica("Musica0"));
