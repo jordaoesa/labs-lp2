@@ -13,7 +13,8 @@ import java.util.ArrayList;
 public class PlaylistDinamica {
 
 	private String autor;
-	private String preferida;
+	private String preferida = "Nao tem preferida"; // PERGUNTAR SE PODE DEIXAR
+													// NULL
 	private String nome;
 	private List<String> musicas = new ArrayList<String>();
 
@@ -214,7 +215,9 @@ public class PlaylistDinamica {
 	}
 
 	/**
-	 * Metodo responsavel por comparar duas playlistsDinamicas.
+	 * Metodo responsavel por comparar duas playlistsDinamicas. A comparacao eh
+	 * feita com base nas musicas das playlistsDinamicas. Se elas contiverem as
+	 * mesmas musicas e em mesma quantidade elas sao iguais.
 	 * 
 	 * @return Retorna true caso as playlistsDinamicas sejam iguais e false caso
 	 *         contrario.
@@ -223,6 +226,7 @@ public class PlaylistDinamica {
 		if (!(outraPlaylist instanceof PlaylistDinamica)) {
 			return false;
 		}
+
 		PlaylistDinamica playlistOutra = (PlaylistDinamica) outraPlaylist;
 		if (this.musicas.size() != playlistOutra.getMusicas().size())
 			return false;
@@ -230,19 +234,28 @@ public class PlaylistDinamica {
 		List<String> musicasTemp1 = new ArrayList<String>();
 		List<String> musicasTemp2 = new ArrayList<String>();
 
+		// Iniciando os elementos das playlistsDinamicas Temporarias como
+		// null.
+		for (int i = 0; i < musicas.size(); i++) {
+			musicasTemp1.add(null);
+			musicasTemp2.add(null);
+		}
+
 		Collections.copy(musicasTemp1, musicas);
+		System.out.println("copiou 1");
 		Collections.copy(musicasTemp2, playlistOutra.getMusicas());
 
 		Collections.sort(musicasTemp1);
 		Collections.sort(musicasTemp2);
 
 		int j = 0;
-		for (String musica : musicas) {
-			if (!musica.equals(playlistOutra.getMusicas().get(j))) {
+		for (String musica : musicasTemp1) {
+			if (!musica.equals(musicasTemp2.get(j))) {
 				return false;
 			}
 			j++;
 		}
+
 		return true;
 	}
 }

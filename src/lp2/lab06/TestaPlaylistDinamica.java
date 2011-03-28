@@ -28,4 +28,22 @@ public class TestaPlaylistDinamica {
 		System.out.println(p1.toString());
 		System.out.println(p2.toString());
 	}
+	
+	@Test
+	public void testaEquals(){
+		PlaylistDinamica pl1 = new PlaylistDinamica("Playlist1","Jordao","Musica0");
+		PlaylistDinamica pl2 = new PlaylistDinamica("Playlist1","Jordao","Musica0");
+		
+		System.out.println("ok");
+		
+		Assert.assertTrue("Erro aquew no 1 teste", pl1.equals(pl2));
+		
+		System.out.println("ok");
+		
+		pl1.adicionaMusica("Musica1");
+		pl2.adicionaMusica("Musica1");
+		
+		
+		Assert.assertTrue("Erro aquew no 1 teste", pl1.equals(pl2));
+	}
 }
