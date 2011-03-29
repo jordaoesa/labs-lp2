@@ -4,6 +4,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
 
+/* 
+ * Aluno: Jordao Ezequiel Serafim de Araujo
+ * Matricula: 21021526
+ * 
+ */
 /**
  * Uma playlist de musicas dinamica.
  * 
@@ -13,8 +18,7 @@ import java.util.ArrayList;
 public class PlaylistDinamica {
 
 	private String autor;
-	private String preferida = "Nao tem preferida"; // PERGUNTAR SE PODE DEIXAR
-													// NULL
+	private String preferida = "Nao tem preferida";
 	private String nome;
 	private List<String> musicas = new ArrayList<String>();
 
@@ -242,7 +246,6 @@ public class PlaylistDinamica {
 		}
 
 		Collections.copy(musicasTemp1, musicas);
-		System.out.println("copiou 1");
 		Collections.copy(musicasTemp2, playlistOutra.getMusicas());
 
 		Collections.sort(musicasTemp1);
