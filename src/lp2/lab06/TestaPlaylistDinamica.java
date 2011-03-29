@@ -404,20 +404,23 @@ public class TestaPlaylistDinamica {
 
 		Assert.assertTrue("Erro em equals playlistDinamica 1", p1.equals(p1));
 		Assert.assertTrue("Erro em equals playlistDinamica 2", p2.equals(p2));
-		
-		
-		// tetetete
-		PlaylistDinamica pl1 = new PlaylistDinamica("playlistDinamica 1", "jordao");
-		PlaylistDinamica pl2 = new PlaylistDinamica("playlistDinamica 2", "jordao");
-		
+
+		// testes para ver se o programador que criou a classe PlaylistDinamica
+		// esta usando o metodo constainsAll de listas para comparar as duas
+		// playlistsDinamicas.
+		PlaylistDinamica pl1 = new PlaylistDinamica("playlistDinamica 1",
+				"jordao");
+		PlaylistDinamica pl2 = new PlaylistDinamica("playlistDinamica 2",
+				"jordao");
+
 		pl1.adicionaMusica("musica0");
 		pl1.adicionaMusica("musica1");
 		pl1.adicionaMusica("musica2");
-		
+
 		pl2.adicionaMusica("musica0");
 		pl2.adicionaMusica("musica0");
 		pl2.adicionaMusica("musica0");
-		
-		Assert.assertFalse("Erro em quals playlistDinamica", pl1.equals(pl2));
+
+		Assert.assertFalse("Erro em equals playlistDinamica", pl1.equals(pl2));
 	}
 }
