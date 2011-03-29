@@ -7,16 +7,35 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+/*
+ * Aluno: Jordao Ezequiel Serafim de Araujo
+ * Matricula: 21021526
+ * 
+ */
+/**
+ * Conjunto de testes para a classe PlaylistDinamica.
+ * 
+ * @author jordaoesa
+ */
 public class TestaPlaylistDinamica {
 
 	PlaylistDinamica p1, p2;
 
+	/**
+	 * Instanciacao de duas playlistsDinamicas, uma com cada construtor da
+	 * classe.
+	 */
 	@Before
 	public void criaPlaylistsDinamicas() {
 		p1 = new PlaylistDinamica("PlaylistDinamica 1", "Jordao");
 		p2 = new PlaylistDinamica("PlaylistDinamica 2", "Jordao", "Faint");
 	}
 
+	/**
+	 * Bloco de testes para os contrutores. Aqui sao verificados se os valores
+	 * passados no contrutor realmente sao atribuidos aos atributos da
+	 * playlistDinamica.
+	 */
 	@Test
 	public void testaConstrutor() {
 		List<String> listaDeMusicasTeste = new ArrayList<String>();
@@ -45,6 +64,9 @@ public class TestaPlaylistDinamica {
 
 	}
 
+	/**
+	 * Bloco de testes para o metodo setPreferida() da playlistDinamica.
+	 */
 	@Test
 	public void testaSetPreferida() {
 
@@ -80,6 +102,13 @@ public class TestaPlaylistDinamica {
 				"Musica2", p2.getMusicas().get(2));
 	}
 
+	/**
+	 * Bloco de testes para os metodos adicionaMusica() da playlistDinamica.
+	 * 
+	 * @throws Exception
+	 *             Excecao retornada caso a posicao passada como parametro no
+	 *             adicionaMusica() seja invalida.
+	 */
 	@Test
 	public void testaAdicionaMusica() throws Exception {
 
@@ -180,6 +209,13 @@ public class TestaPlaylistDinamica {
 		}
 	}
 
+	/**
+	 * Bloco de testes para o metodo pesquisaMusica() da playlistDinamica.
+	 * 
+	 * @throws Exception
+	 *             Excecao retornada caso a posicao passada como parametro no
+	 *             adicionaMusica() seja invalida.
+	 */
 	@Test
 	public void testaPesquisaMusica() throws Exception {
 		// testando pesquisaMusica em playlistDinamica 1
@@ -235,6 +271,9 @@ public class TestaPlaylistDinamica {
 				"Faint", p2.pesquisaMusica("Faint"));
 	}
 
+	/**
+	 * Bloco de testes para o metodo contemMusica() da playlistDinamica.
+	 */
 	@Test
 	public void testaContemMusica() {
 		Assert.assertFalse("Erro em contemMusica playlistDinamica 1",
@@ -252,6 +291,13 @@ public class TestaPlaylistDinamica {
 				p2.contemMusica("Musica1"));
 	}
 
+	/**
+	 * Bloco de testes para o metodo removeMusica() da playlistDinamica().
+	 * 
+	 * @throws Exception
+	 *             Excecao retornada caso a posicao passada como parametro no
+	 *             adicionaMusica() seja invalida.
+	 */
 	@Test
 	public void testaRemoveMusica() throws Exception {
 		Assert.assertNull("Erro em removeMusica playlistDinamica 1",
@@ -272,6 +318,9 @@ public class TestaPlaylistDinamica {
 				"Musica0", p2.removeMusica("Musica0"));
 	}
 
+	/**
+	 * Bloco de testes para o metodo numeroDeMusicas() da playlistDinamica.
+	 */
 	@Test
 	public void numeroDeMusicas() {
 		Assert.assertEquals("Erro em numeroDeMusicas playlistDinamica 1", 0,
@@ -297,6 +346,9 @@ public class TestaPlaylistDinamica {
 				p2.numeroDeMusicas());
 	}
 
+	/**
+	 * Bloco de testes para o metodo toString() da playlistDinamica.
+	 */
 	@Test
 	public void testaToString() {
 		Assert.assertEquals(
@@ -323,6 +375,12 @@ public class TestaPlaylistDinamica {
 				p2.toString());
 	}
 
+	/**
+	 * Bloco de testes para o metodo equals() da playlistDinamica. Sao testados
+	 * os casos de se passar objetos de instancia diferente, ou playlists com
+	 * tamanhos diferentes, ou playlists com musicas iguais nas mesmas posicoes
+	 * e em posicoes diferentes.
+	 */
 	@Test
 	public void testaEquals() {
 		Assert.assertFalse("Erro em equals playlistDinamica 1", p1.equals(10));
