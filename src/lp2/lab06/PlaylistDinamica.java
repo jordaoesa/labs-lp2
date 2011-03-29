@@ -258,7 +258,8 @@ public class PlaylistDinamica {
 			}
 			j++;
 		}
-
+//		if(!musicas.containsAll(playlistOutra.getMusicas()))
+//			return false;
 		return true;
 	}
 }
