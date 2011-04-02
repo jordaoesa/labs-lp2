@@ -1,4 +1,4 @@
-package lp2.desafio06;
+package lp2.desafio03;
 
 import java.util.ArrayList;
 import java.util.Iterator;

@@ -1,4 +1,4 @@
-package lp2.desafio06;
+package lp2.desafio03;
 
 /**
  * Um aluno.
