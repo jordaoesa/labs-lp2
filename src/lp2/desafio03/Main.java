@@ -13,7 +13,9 @@ public class Main {
 		banco = new Banco(qtdAlunos());
 		impressao(banco);
 
-		realizarOperacao(banco);
+		while (true) {
+			realizarOperacao(banco);
+		}
 	}
 
 	/**
@@ -51,31 +53,56 @@ public class Main {
 		return (new Scanner(System.in)).next();
 	}
 
+	/**
+	 * 
+	 * @param banco
+	 */
 	public static void realizarOperacao(Banco banco) {
 		int valorPagamento;
 		int valorEmprestimo;
 		String nomeCredor;
 		String nomeDevedor;
-		
+		String nomePagador;
+		String nomeBeneficiario;
+
 		String operacao = operacaoARealizar();
-		if (operacao.equals("E")) {
-			impressao(banco);
+		if (operacao.equalsIgnoreCase("E")) {
 
 			System.out.print("Qual a quantia emprestada? ");
 			valorEmprestimo = (new Scanner(System.in)).nextInt();
+			impressao(banco);
 			System.out.print("Quem esta emprestando? ");
 			nomeCredor = (new Scanner(System.in)).next();
+			impressao(banco);
 			System.out.print("Quem esta recebendo? ");
 			nomeDevedor = (new Scanner(System.in)).next();
 
 			banco.novoEmprestimo(nomeCredor, nomeDevedor, valorEmprestimo);
-			
-			System.out.println(banco.imprimeRelacoes());
-			
-		} else if (operacao.equals("P")) {
+			banco.imprimeRelacoes();
 
-		} else if (operacao.equals("T")) {
-			System.exit(0);
+		} else if (operacao.equalsIgnoreCase("P")) {
+
+			System.out.print("Qual a quantia a ser paga? ");
+			valorPagamento = (new Scanner(System.in)).nextInt();
+			impressao(banco);
+			System.out.print("Quem esta pagando? ");
+			nomePagador = (new Scanner(System.in)).next();
+			impressao(banco);
+			System.out.print("Quem esta sendo pago? ");
+			nomeBeneficiario = (new Scanner(System.in)).next();
+
+			banco.novoPagamento(nomePagador, nomeBeneficiario, valorPagamento);
+			banco.imprimeRelacoes();
+
+		} else if (operacao.equalsIgnoreCase("T")) {
+			System.out.println("Simplificacao: ");
+			banco.simplificacao();
+			System.out.println("Simplificacao realizada com sucesso.");
+			System.out.println("Fim das Tarefas.");
+			System.out.println();
+			System.out.println("Deseja Sair? [T para sair]-[outra tecla para continuar]");
+			String saida = (new Scanner(System.in)).nextLine();
+			if(saida.equalsIgnoreCase("T")) System.exit(0);
 		}
 	}
 

@@ -1,9 +1,5 @@
 package lp2.desafio03;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Scanner;
 
 /**
  * Um Banco.
@@ -16,13 +12,6 @@ import java.util.Scanner;
 public class Banco {
 
 	private Aluno alunos[];
-	private String nomeCredor;
-	private String nomeDevedor;
-	private String nomePagador;
-	private String nomeBeneficiario;
-	private float valorPagamento;
-	private float valorEmprestimo;
-	List<String[]> relacoes = new ArrayList<String[]>();
 
 	/**
 	 * 
@@ -59,21 +48,44 @@ public class Banco {
 	 */
 	public void novoEmprestimo(String nomeCredor, String nomeDevedor,
 			float valorEmprestimo) {
-		// for(int i=0; i<alunos.length; i++){
-		// if(alunos[i].getNome().equals(nomeDevedor)){
-		// this.nomeDevedor = nomeDevedor;
-		// }
-		// if(alunos[i].getNome().equals(nomeCredor)){
-		// this.nomeCredor = nomeCredor;
-		// }
-		// }
 
-		// this.nomeDevedor = nomeDevedor;
-		// this.nomeCredor = nomeCredor;
-		// this.valorEmprestimo = valorEmprestimo;
-		String relacao[] = { nomeCredor, nomeDevedor,
-				String.valueOf(valorEmprestimo) };
-		relacoes.add(relacao);
+		Aluno devedor = null;
+		Aluno credor = null;
+		boolean verifica = true;
+
+		for (int i = 0; i < alunos.length; i++) {
+			if (alunos[i].getNome().equals(nomeCredor)) {
+				credor = alunos[i];
+			}
+			if (alunos[i].getNome().equals(nomeDevedor)) {
+				devedor = alunos[i];
+			}
+		}
+
+		if (devedor == null || credor == null) {
+			System.out
+					.println("->>>> Nome(s) inexistente(s) na lista de alunos.");
+			return;
+		}
+
+		// verifica dividas
+		for (int i = 0; i < devedor.getRelacoes().size(); i++) {
+			if (devedor.getRelacoes().get(i).getAluno().getNome()
+					.equals(nomeCredor)) {
+				System.out.println("->>>> O aluno " + nomeCredor
+						+ " deve ao aluno " + nomeDevedor
+						+ ". Ele deve PAGAR sua divida.");
+				verifica = false;
+				break;
+			}
+		}
+		if (verifica) {
+			credor.adicionaRelacao(new Relacao(devedor, valorEmprestimo));
+		}
+
+		// atualizando os atributos dos alunos
+		credor.setSaldoCredor(credor.getSaldoCredor() + valorEmprestimo);
+		devedor.setSaldoDevedor(devedor.getSaldoDevedor() + valorEmprestimo);
 	}
 
 	/**
@@ -84,21 +96,98 @@ public class Banco {
 	 */
 	public void novoPagamento(String nomePagador, String nomeBeneficiario,
 			float valorPagamento) {
-		this.nomePagador = nomePagador;
-		this.nomeBeneficiario = nomeBeneficiario;
-		this.valorPagamento = valorPagamento;
-	}
 
-	public String imprimeRelacoes() {
-		String impressao = "";
-		Iterator<String[]> i = relacoes.iterator();
-		while (i.hasNext()) {
-			String teste[] = i.next();
-			for (int j = 0; j < teste.length; j++) {
-				impressao += teste[j] + ", ";
+		Aluno pagador = null;
+		Aluno beneficiario = null;
+		boolean verifica = true;
+
+		for (int i = 0; i < alunos.length; i++) {
+			if (alunos[i].getNome().equals(nomePagador)) {
+				pagador = alunos[i];
+			}
+			if (alunos[i].getNome().equals(nomeBeneficiario)) {
+				beneficiario = alunos[i];
 			}
 		}
-		return impressao;
+
+		if (pagador == null || beneficiario == null) {
+			System.out
+					.println("->>>> Nome(s) inexistente(s) na lista de alunos.");
+			return;
+		}
+
+		// verifica dividas
+		for (int i = 0; i < beneficiario.getRelacoes().size(); i++) {
+			if (beneficiario.getRelacoes().get(i).getAluno().getNome()
+					.equals(nomePagador)
+					&& valorPagamento <= beneficiario.getRelacoes().get(i)
+							.getValor()) {
+				verifica = false;
+				break;
+			}
+		}
+		if (!verifica) {
+			beneficiario
+					.adicionaRelacao(new Relacao(pagador, (-valorPagamento)));
+		} else {
+			System.out
+					.println("->>>> O aluno "
+							+ nomePagador
+							+ " nao deve ou o valor que esta sendo pago eh maior que a divida ao aluno "
+							+ nomeBeneficiario);
+		}
+
+	}
+
+	/**
+	 * 
+	 */
+	public void imprimeRelacoes() {
+		System.out.println("->>>> Relacoes: ");
+		for (int i = 0; i < alunos.length; i++) {
+			for (int j = 0; j < alunos[i].getRelacoes().size(); j++) {
+				System.out.println(alunos[i].getNome()
+						+ " tem saldo positivo de "
+						+ alunos[i].getRelacoes().get(j).getValor() + " com "
+						+ alunos[i].getRelacoes().get(j).getAluno().getNome());
+			}
+		}
+		System.out.println("->>>> Fim de Relacoes.");
+	}
+	
+	/**
+	 * Metodo responsavel pelas simplificacoes dos saldos entre os alunos. 
+	 * O objetivo eh diminuir a quantidade de pagamentos entre os alunos.
+	 * Este metodo eh da ordem (n*n)*(m*m). Onde 'n' eh o numero de alunos 
+	 * e 'm' eh a quantidade de relacoes entre eles.
+	 */
+	public void simplificacao(){
+		
+		for(int i=0; i<alunos.length; i++)//{
+			for(int j=0; j<alunos.length; j++)//{
+				for(int k=0; k<alunos[i].getRelacoes().size(); k++)//{
+					if(alunos[i].getRelacoes().get(k).getAluno().getNome().equals(alunos[j].getNome()))//{
+						for(int l=0; l<alunos.length; l++)//{
+							for(int m=0; m<alunos[j].getRelacoes().size(); m++)//{
+								if(alunos[j].getRelacoes().get(m).getAluno().getNome().equals(alunos[l].getNome()))//{
+									for(int n=0; n<alunos[l].getRelacoes().size(); n++)//{
+										if(alunos[l].getRelacoes().get(n).getAluno().getNome().equals(alunos[i].getNome())){
+											float menor = alunos[i].getRelacoes().get(k).getValor();
+											if(alunos[j].getRelacoes().get(m).getValor() < menor) menor = alunos[j].getRelacoes().get(m).getValor();
+											if(alunos[l].getRelacoes().get(n).getValor() < menor) menor = alunos[l].getRelacoes().get(n).getValor();
+											alunos[i].adicionaRelacao(new Relacao(alunos[j], (-menor)));
+											alunos[j].adicionaRelacao(new Relacao(alunos[l], (-menor)));
+											alunos[l].adicionaRelacao(new Relacao(alunos[i], (-menor)));
+										}
+//									}
+//								}
+//							}
+//						}
+//					}
+//				}
+//			}
+//		}
+		this.imprimeRelacoes();
 	}
 
 }
