@@ -2,15 +2,35 @@ package lp2.desafio03;
 
 import java.util.Scanner;
 
+/**
+ * A classe de execucao do programa.
+ * 
+ * @author jordaoesa
+ * @author marceloax
+ * @author felipebb <br>
+ * <br>
+ *         Aluno: Jordao Ezequiel Serafim de Araujo<br>
+ *         Matricula: 21021526<br>
+ * <br>
+ * 
+ *         Aluno: Marcelo Avelino Xavier<br>
+ *         Matricula: 21115291<br>
+ * <br>
+ * 
+ *         Aluno: Felipe Brasileiro Barbosa<br>
+ *         Matricula: 21021067<br>
+ * <br>
+ * 
+ */
 public class Main {
 
 	/**
+	 * Metodo de execucao do programa.
 	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Banco banco;
-		banco = new Banco(qtdAlunos());
+		Banco banco = new Banco(qtdAlunos());
 		impressao(banco);
 
 		while (true) {
@@ -19,17 +39,67 @@ public class Main {
 	}
 
 	/**
+	 * Metodo responsavel por receber a quantidade de alunos usuarios.
 	 * 
-	 * @return
+	 * @return A quantidade de alunos usuarios.
 	 */
 	private static int qtdAlunos() {
-		System.out.print("Quantos alunos serao envolvidos no calculo: ");
-		return (new Scanner(System.in)).nextInt();
+		System.out.println("Quantos alunos serao envolvidos no calculo: ");
+		return recebeInteiro();
 	}
 
 	/**
+	 * Metodo responsavel por receber um inteiro.
+	 * 
+	 * @return Um inteiro.
+	 */
+	private static int recebeInteiro() {
+		String str;
+		do {
+			System.out.print("-> ");
+			str = (new Scanner(System.in)).nextLine();
+		} while (temLetra(str));
+		return Integer.parseInt(str);
+	}
+
+	/**
+	 * Metodo responsavel por verificar a existencia de caracteres em numeros.
+	 * 
+	 * @param str
+	 *            O numero recebido como uma string.
+	 * @return Retorna true caso contenha letras e false caso contrario.
+	 */
+	private static boolean temLetra(String str) {
+		if (str.isEmpty()) {
+			return true;
+		}
+		for (Character c : str.toCharArray()) {
+			if (!Character.isDigit(c)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Metodo responsavel por receber string nao vazias.
+	 * 
+	 * @return A string recebida.
+	 */
+	private static String getString() {
+		String entrada = "";
+		do {
+			System.out.print("-> ");
+			entrada = (new Scanner(System.in)).nextLine();
+		} while (entrada.replace(" ", "").equals(""));
+		return entrada;
+	}
+
+	/**
+	 * Metodo responsavel por imprimir a lista de alunos.
 	 * 
 	 * @param banco
+	 *            O banco que contem a lista.
 	 */
 	private static void impressao(Banco banco) {
 		String impressao = "";
@@ -41,23 +111,31 @@ public class Main {
 	}
 
 	/**
+	 * Metodo responsavel por imprimir o menu de opcoes e receber uma string com
+	 * a opcao.
 	 * 
+	 * @return A string opcao.
 	 */
 	private static String operacaoARealizar() {
-		System.out.println("Operacoes");
-		System.out.println("E - Emprestimo");
-		System.out.println("P - Pagamento");
-		System.out.println("T - Sair");
-		System.out.print("Digite a operacao: ");
+		System.out.println("\n# Operacoes #######");
+		System.out.println("# E - Emprestimo  #");
+		System.out.println("# P - Pagamento   #");
+		System.out.println("# S - Simplificar #");
+		System.out.println("# T - Sair        #");
+		System.out.println("###################");
+		System.out.print("-> Digite a operacao: ");
 
-		return (new Scanner(System.in)).next();
+		return getString();
 	}
 
 	/**
+	 * Metodo responsavel por receber os dados que serao utilizados nas
+	 * operacoes.
 	 * 
 	 * @param banco
+	 *            O banco responsavel pelas operacoes.
 	 */
-	public static void realizarOperacao(Banco banco) {
+	private static void realizarOperacao(Banco banco) {
 		int valorPagamento;
 		int valorEmprestimo;
 		String nomeCredor;
@@ -68,41 +146,40 @@ public class Main {
 		String operacao = operacaoARealizar();
 		if (operacao.equalsIgnoreCase("E")) {
 
-			System.out.print("Qual a quantia emprestada? ");
-			valorEmprestimo = (new Scanner(System.in)).nextInt();
+			System.out.println("-> Qual a quantia emprestada? ");
+			valorEmprestimo = recebeInteiro();
 			impressao(banco);
-			System.out.print("Quem esta emprestando? ");
-			nomeCredor = (new Scanner(System.in)).next();
+			System.out.println("-> Quem esta emprestando? ");
+			nomeCredor = getString();
 			impressao(banco);
-			System.out.print("Quem esta recebendo? ");
-			nomeDevedor = (new Scanner(System.in)).next();
+			System.out.println("-> Quem esta recebendo? ");
+			nomeDevedor = getString();
 
 			banco.novoEmprestimo(nomeCredor, nomeDevedor, valorEmprestimo);
 			banco.imprimeRelacoes();
 
 		} else if (operacao.equalsIgnoreCase("P")) {
 
-			System.out.print("Qual a quantia a ser paga? ");
-			valorPagamento = (new Scanner(System.in)).nextInt();
+			System.out.println("-> Qual a quantia a ser paga? ");
+			valorPagamento = recebeInteiro();
 			impressao(banco);
-			System.out.print("Quem esta pagando? ");
-			nomePagador = (new Scanner(System.in)).next();
+			System.out.println("-> Quem esta pagando? ");
+			nomePagador = getString();
 			impressao(banco);
-			System.out.print("Quem esta sendo pago? ");
-			nomeBeneficiario = (new Scanner(System.in)).next();
+			System.out.println("-> Quem esta sendo pago? ");
+			nomeBeneficiario = getString();
 
 			banco.novoPagamento(nomePagador, nomeBeneficiario, valorPagamento);
 			banco.imprimeRelacoes();
 
-		} else if (operacao.equalsIgnoreCase("T")) {
-			System.out.println("Simplificacao: ");
+		} else if (operacao.equalsIgnoreCase("S")) {
+			System.out
+					.println("\n#### Simplificacao #######################################");
 			banco.simplificacao();
-			System.out.println("Simplificacao realizada com sucesso.");
-			System.out.println("Fim das Tarefas.");
-			System.out.println();
-			System.out.println("Deseja Sair? [T para sair]-[outra tecla para continuar]");
-			String saida = (new Scanner(System.in)).nextLine();
-			if(saida.equalsIgnoreCase("T")) System.exit(0);
+			System.out
+					.println("#### Simplificacao realizada com sucesso. ################\n");
+		} else if (operacao.equalsIgnoreCase("T")) {
+			System.exit(0);
 		}
 	}
 
