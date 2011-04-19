@@ -1,0 +1,8 @@
+IC, 4, minitestes, 0, P2, TC
+IC2, 10, minitestes, 0, P2, TC
+P1, 10, convencional, 2, P2, LP2, TG
+LP1, 10, minitestes, 2, P2, LP2, TG
+CALCULO, 3, convencional, 0, CALCULO-II, FISICA-CLASSICA
+VETORIAL, 3, convencional, 0, LINEAR
+P2, 9, minitestes, 2, EDA, LEDA
+LP2, 12, minitestes, 2, EDA, LEDA
