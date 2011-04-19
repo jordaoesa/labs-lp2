@@ -24,16 +24,8 @@ public class Main {
 	private static String disciplinasMaiorQueSeteJaImpresas = "";
 	private static String disciplinasMenorQueSeteJaImpresas = "";
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
-		// String caminho =
-		// "C:\\Users\\lsi\\workspace\\labs-lp2\\src\\lp2\\lab08\\disciplinas.txt";
-		// String caminho =
-		// "C:\\Users\\Seven\\workspace\\labs-lp2\\src\\lp2\\lab08\\disciplinas.txt";
-		// String caminho =
-		// "/home/jordaoesa/workspace/labs-lp2/src/lp2/lab08/disciplinas.txt";
+		// COLOQUE AQUI O CAMINHO PARA O ARQUIVO
 		String caminho = "/home/jordao/workspace/labs-lp2/src/lp2/lab08/disciplinas.txt";
 
 		start(caminho);
