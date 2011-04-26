@@ -15,8 +15,16 @@ import java.util.Scanner;
  * <br>
  *         Respostas as questoes presentes no lab: <br>
  *         1) Estao comentados todos os lugares onde ha chamadas polimorficas.<br>
- *         2) Nao, eu nao recomendo nenhuma outra forma onde haja maior reuso de
- *         codigo que esta utilizando polimorfismo. <br>
+ *         2) Uma maneira de diminuir a repeticao de codigo seria a
+ *         implementacao, ja na classe abstrata Veiculo, dos metodos
+ *         consertosPassados(), verificacoes(), adicionaVerificacao() e
+ *         consertar(), ja que todos tem a mesma implmentacao independente do
+ *         veiculo. O metodo limpar() poderia receber como parametro um String
+ *         indicando o nome do veiculo que seria impresso (moto ou carro). Os
+ *         metodos trocarPneus() e checaPneuAvariado() poderiam receber como
+ *         parametro a quantidade de pneus que o veiculo possui e isso tambem os
+ *         tornaria metodos mais "flexiveis". Dessa maneira o reuso de codigo
+ *         seria bem maior.<br>
  * <br>
  */
 public class OficinaDeVeiculos {
