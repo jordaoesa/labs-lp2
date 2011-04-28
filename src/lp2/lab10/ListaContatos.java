@@ -49,17 +49,21 @@ public class ListaContatos {
 		}
 	}
 	
-	public void obterContatos(Pessoa pessoa){
-		
+	public List<ItemDeContato> obterContatos(Pessoa novaPessoa){
+		for(Pessoa pessoa : listaDePessoas){
+			if(pessoa.equals(novaPessoa)){
+				return pessoa.getListaDeContatos();
+			}
+		}
+		return null;
 	}
 	
-//	este método deve retornar uma lista de itens
-//	de contato associada a uma determinada pessoa;
-	
-	public void nomePessoasCadastradas(){
-		
+	public List<String> nomePessoasCadastradas(){
+		List<String> pessoasCadastradas = new ArrayList<String>();
+		for(Pessoa pessoa : listaDePessoas){
+			pessoasCadastradas.add(pessoa.getNome());
+		}
+		return pessoasCadastradas;
 	}
-//	 retorna uma lista com o nome das
-//	pessoas já cadastradas.
 
 }

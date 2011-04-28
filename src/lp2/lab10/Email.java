@@ -34,7 +34,7 @@ public class Email implements ItemDeContato {
 	}
 
 	public boolean checaEmail(String email) {
-		return email.matches("[a-z_\\.]*@[a-z]*\\.[a-z]*");
+		return email.matches("[a-zA-Z_\\.]*@[a-z]*\\.[a-z]*");
 	}
 
 //	public static void main(String[] args) {

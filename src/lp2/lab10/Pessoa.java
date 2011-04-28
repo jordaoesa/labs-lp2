@@ -56,9 +56,14 @@ public class Pessoa implements Cidadao, Contribuinte {
 		if (!(obj instanceof Pessoa))
 			return false;
 		Pessoa pessoa = (Pessoa) obj;
-		if (!pessoa.getNome().equalsIgnoreCase(getNome()))
-			return false;
-		return true;
+		if (pessoa.getNome().equalsIgnoreCase(getNome())) {
+			return true;
+		}else{
+			if(pessoa.getCPF().equals(getCPF()) || pessoa.getRG().equals(getRG())){
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public String getNome() {
