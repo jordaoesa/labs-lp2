@@ -23,9 +23,9 @@ public class Endereco implements ItemDeContato {
 
 	@Override
 	public String exibirContato() {
-		String exibeContato = "Rua: " + rua + "\nComplemento: " + complemento
-				+ "\nBairro: " + bairro + "\nCidade: " + cidade + "\nEstado: "
-				+ estado + "\nCEP: " + cep + "\nNumero: " + numero;
+		String exibeContato = "Endereco >> Rua: " + rua + ", Complemento: " + complemento
+				+ ", Bairro: " + bairro + ", Cidade: " + cidade + ", Estado: "
+				+ estado + ", CEP: " + cep + ", Numero: " + numero;
 		return exibeContato;
 	}
 

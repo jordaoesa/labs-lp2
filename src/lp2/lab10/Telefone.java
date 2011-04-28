@@ -6,7 +6,7 @@ public class Telefone implements ItemDeContato {
 
 	@Override
 	public String exibirContato() {
-		String exibeContato = "Telefone: " + telefone;
+		String exibeContato = "Telefone >> " + telefone;
 		return exibeContato;
 	}
 

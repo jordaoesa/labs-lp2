@@ -3,10 +3,13 @@ package lp2.lab10;
 public class Email implements ItemDeContato {
 
 	private String email;
+	
+	public Email(){
+	}
 
 	@Override
 	public String exibirContato() {
-		String exibeContato = "Email: " + email;
+		String exibeContato = "Email >> " + email;
 		return exibeContato;
 	}
 

@@ -5,19 +5,19 @@ import java.util.List;
 
 public class ListaContatos {
 	
-	private List<Pessoa> listaDePessoas = new ArrayList<Pessoa>();
-	
+	private List<Pessoa> listaDePessoas;
+
 	public ListaContatos(){
-		
+		listaDePessoas = new ArrayList<Pessoa>();
 	}
 	
-	public void adicionarPessoa(Pessoa novaPessoa){
+	public boolean adicionarPessoa(Pessoa novaPessoa){
 		for(Pessoa pessoa : listaDePessoas){
 			if(pessoa.equals(novaPessoa)){
-				return;
+				return false;
 			}
 		}
-		listaDePessoas.add(novaPessoa);
+		return listaDePessoas.add(novaPessoa);
 	}
 	
 	public boolean removerItemDeContato(Pessoa novaPessoa, ItemDeContato item){
@@ -64,6 +64,14 @@ public class ListaContatos {
 			pessoasCadastradas.add(pessoa.getNome());
 		}
 		return pessoasCadastradas;
+	}
+	
+	public List<Pessoa> getListaDePessoas() {
+		return listaDePessoas;
+	}
+
+	public void setListaDePessoas(List<Pessoa> listaDePessoas) {
+		this.listaDePessoas = listaDePessoas;
 	}
 
 }
