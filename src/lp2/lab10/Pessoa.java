@@ -13,12 +13,13 @@ public class Pessoa implements Cidadao, Contribuinte {
 	private List<ItemDeContato> listaDeContatos = new ArrayList<ItemDeContato>();
 
 	public Pessoa(String nome, String rg, String cpf, int idade,
-			double salario) {
+			double salario, List<ItemDeContato> listaDeContatos) {
 		this.nome = nome;
 		this.rg = rg;
 		this.cpf = cpf;
 		this.idade = idade;
 		this.salario = salario;
+		this.listaDeContatos = listaDeContatos;
 	}
 
 	@Override
@@ -48,6 +49,16 @@ public class Pessoa implements Cidadao, Contribuinte {
 	@Override
 	public String getRG() {
 		return rg;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Pessoa))
+			return false;
+		Pessoa pessoa = (Pessoa) obj;
+		if (!pessoa.getNome().equalsIgnoreCase(getNome()))
+			return false;
+		return true;
 	}
 
 	public String getNome() {
@@ -92,6 +103,16 @@ public class Pessoa implements Cidadao, Contribuinte {
 
 	public void setListaDeContatos(List<ItemDeContato> listaDeContatos) {
 		this.listaDeContatos = listaDeContatos;
+	}
+
+	public boolean adicionarContato(ItemDeContato novoContato) {
+		for (ItemDeContato contato : listaDeContatos) {
+			if (contato.equals(novoContato)) {
+				return false;
+			}
+		}
+		listaDeContatos.add(novoContato);
+		return true;
 	}
 
 	public boolean validaCPF(String cpf) {
