@@ -34,6 +34,23 @@ public class Endereco implements ItemDeContato {
 		return TipoDeItemDeContato.ENDERECO;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Endereco))
+			return false;
+		Endereco end = (Endereco) obj;
+		if (!(end.getBairro().equals(getBairro())
+				|| end.getCep().equals(getCep())
+				|| end.getCidade().equals(getCidade())
+				|| end.getComplemento().equals(getComplemento())
+				|| end.getEstado().equals(getEstado())
+				|| end.getNumero() == getNumero() || end.getRua().equals(
+				getRua())))
+			return false;
+
+		return true;
+	}
+
 	public String getRua() {
 		return rua;
 	}

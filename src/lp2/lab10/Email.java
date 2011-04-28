@@ -14,6 +14,16 @@ public class Email implements ItemDeContato {
 	public TipoDeItemDeContato tipoDoContato() {
 		return TipoDeItemDeContato.EMAIL;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof Email))
+			return false;
+		Email em = (Email) obj;
+		if(!em.getEmail().equals(getEmail()))
+			return false;
+		return true;
+	}
 
 	public String getEmail() {
 		return email;

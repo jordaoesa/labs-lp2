@@ -1,9 +1,9 @@
 package lp2.lab10;
 
-public class Telefone implements ItemDeContato{
+public class Telefone implements ItemDeContato {
 
 	private String telefone;
-	
+
 	@Override
 	public String exibirContato() {
 		String exibeContato = "Telefone: " + telefone;
@@ -15,6 +15,16 @@ public class Telefone implements ItemDeContato{
 		return TipoDeItemDeContato.TELEFONE;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Telefone))
+			return false;
+		Telefone tel = (Telefone) obj;
+		if (!tel.getTelefone().equals(getTelefone()))
+			return false;
+		return true;
+	}
+
 	public String getTelefone() {
 		return telefone;
 	}
@@ -22,13 +32,13 @@ public class Telefone implements ItemDeContato{
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	
-	public boolean checaTelefone(String telefone){
+
+	public boolean checaTelefone(String telefone) {
 		return telefone.matches("\\d\\d\\-\\d\\d\\-\\d\\d\\d\\d\\d\\d\\d\\d");
 	}
 
-//	public static void main(String[] args) {
-//		Telefone t = new Telefone();
-//		System.out.println(t.checaTelefone("55-83-99081560"));
-//	}
+	// public static void main(String[] args) {
+	// Telefone t = new Telefone();
+	// System.out.println(t.checaTelefone("55-83-99081560"));
+	// }
 }
