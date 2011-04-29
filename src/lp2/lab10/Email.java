@@ -1,5 +1,15 @@
 package lp2.lab10;
 
+/**
+ * Um tipo de Item de Contato Email.
+ * 
+ * @author jordaoesa<br>
+ * <br>
+ *         Aluno: Jordao Ezequiel Serafim de Araujo<br>
+ *         Matricula: 21021526<br>
+ * <br>
+ * 
+ */
 public class Email implements ItemDeContato {
 
 	private String email;
