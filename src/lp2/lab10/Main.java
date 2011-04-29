@@ -24,23 +24,25 @@ public class Main {
 	 * 
 	 */
 	private static void menuPrincipal(){
-		System.out.println("=====================================================");
-		System.out.println("|1 - Cadastrar Funcionario                          |");
-		System.out.println("|2 - Remover Funcionario                            |");
-		System.out.println("|3 - Remover Contato de Funcionario                 |");
-		System.out.println("|4 - Verificar Existencia de Contato de Funcionario |");
-		System.out.println("|5 - Substituir Contato de Funcionario              |");
-		System.out.println("|6 - Obter Contatos de Funcionario                  |");
-		System.out.println("|7 - Funcionarios Cadastrados                       |");
-		System.out.println("|8 - Sair                                           |");
-		System.out.println("=====================================================");
+		System.out.println("======================================================");
+		System.out.println("| 1 - Cadastrar Funcionario                          |");
+		System.out.println("| 2 - Remover Funcionario                            |");
+		System.out.println("| 3 - Remover Contato de Funcionario                 |");
+		System.out.println("| 4 - Verificar Existencia de Contato de Funcionario |");
+		System.out.println("| 5 - Substituir Contato de Funcionario              |");
+		System.out.println("| 6 - Obter Contatos de Funcionario                  |");
+		System.out.println("| 7 - Funcionarios Cadastrados                       |");
+		System.out.println("| 8 - Verificar se Funcionario esta apto a Votar     |");
+		System.out.println("| 9 - Valor do Imposto de Renda do Funcionario       |");
+		System.out.println("|10 - Sair                                           |");
+		System.out.println("======================================================");
 	}
 	
 	/**
 	 * 
 	 */
 	private static void recebeDadosIniciais(){
-		int opcao = 8;
+		int opcao = 10;
 		
 		do{
 			menuPrincipal();
@@ -67,13 +69,47 @@ public class Main {
 				case 7:
 					pessoasCadastradas();
 					break;
+				case 8:
+					verificarSeFuncionarioVota();
+					break;
+				case 9:
+					valorDoImpostoDeRendaDeFuncionario();
+					break;
 				default:
 					//pass
 					break;
 			}
-		}while(opcao != 8);
+		}while(opcao != 10);
 	}
 	
+	/**
+	 * 
+	 */
+	private static void valorDoImpostoDeRendaDeFuncionario() {
+		Pessoa pessoa = encontraFuncionario();
+		if(pessoa != null){
+			System.out.println("O Funcionario " + pessoa.getNome() + " Paga " + pessoa.pagaIR() + " De Imposto De Renda.");
+		}else{
+			System.out.println("Funcionario nao encontrado no registro.");
+		}
+	}
+
+	/**
+	 * 
+	 */
+	private static void verificarSeFuncionarioVota() {
+		Pessoa pessoa = encontraFuncionario();
+		if(pessoa != null){
+			if(pessoa.vota()){
+				System.out.println("O Funcionario " + pessoa.getNome() + " Esta Apto a Votar.");
+			}else{
+				System.out.println("O Funcionario " + pessoa.getNome() + " Nao Esta Apto a Votar.");
+			}
+		}else{
+			System.out.println("Funcionario nao encontrado no registro.");
+		}
+	}
+
 	/**
 	 * 
 	 */
@@ -92,225 +128,163 @@ public class Main {
 	 * 
 	 */
 	private static void obterContatosDeFuncionario() {
-		System.out.println("Digite o nome do Funcionario:");
-		String nome;
-		do{
-			nome = getString();
-		}while(temNumero(nome));
-		
-		for(Pessoa pessoa : listaContatos.getListaDePessoas()){
-			if(pessoa.getNome().equalsIgnoreCase(nome)){
-				for(ItemDeContato item : pessoa.getListaDeContatos()){
-					System.out.println(item.exibirContato());
-				}
-				return;
+		Pessoa pessoa = encontraFuncionario();
+		if(pessoa != null){
+			for(ItemDeContato item : pessoa.getListaDeContatos()){
+				System.out.println(item.exibirContato());
 			}
+		}else{
+			System.out.println("Funcionario nao encontrado no registro.");
 		}
-		System.out.println("Funcionario nao encontrado no registro.");
 	}
 
 	/**
 	 * 
 	 */
 	private static void substituirContatoDeFuncionario() {
-		System.out.println("Digite o nome do Funcionario:");
-		String nome;
-		do{
-			nome = getString();
-		}while(temNumero(nome));
-		
-		for(Pessoa pessoa : listaContatos.getListaDePessoas()){
-			if(pessoa.getNome().equalsIgnoreCase(nome)){
-				ItemDeContato item = null;
-				System.out.println("Digite o contato a ser substituido:");
-				System.out.println("1 - Email");
-				System.out.println("2 - Telefone");
-				System.out.println("3 - Endereco");
-				int opcao;
-				do{
-					opcao = getInteiro();
-				}while(opcao < 1 || opcao > 3);
-				
-				switch(opcao){
-					case 1:
-						System.out.println("Email Antigo");
-						item = recebeEmail();
-						break;
-					case 2:
-						System.out.println("Telefone Antigo");
-						item = recebeTelefone();
-						break;
-					case 3:
-						System.out.println("Endereco Antigo");
-						item = recebeEndereco();
-						break;
-					default:
-						break;
-				}
-				
-				for(ItemDeContato it : pessoa.getListaDeContatos()){
-					if(it.equals(item)){
-						if(item instanceof Email){
-							System.out.println("Novo Email");
-							Email em = recebeEmail();
-							pessoa.getListaDeContatos().remove(item);
-							pessoa.adicionarContato(em);
-							System.out.println("O contato:\n" + item.exibirContato() + "\nfoi substituido por:\n" + em.exibirContato());
-						}else if(item instanceof Telefone){
-							System.out.println("Novo Telefone");
-							Telefone tf = recebeTelefone();
-							pessoa.getListaDeContatos().remove(item);
-							pessoa.adicionarContato(tf);
-							System.out.println("O contato:\n" + item.exibirContato() + "\nfoi substituido por:\n" + tf.exibirContato());
-						}else if(item instanceof Endereco){
-							System.out.println("Novo Endereco");
-							Endereco ed = recebeEndereco();
-							pessoa.getListaDeContatos().remove(item);
-							pessoa.adicionarContato(ed);
-							System.out.println("O contato:\n" + item.exibirContato() + "\nfoi substituido por:\n" + ed.exibirContato());
-						}
-						return;
+		Pessoa pessoa = encontraFuncionario();
+		if(pessoa != null){
+			
+			ItemDeContato item = null;
+			System.out.println("Digite o contato a ser substituido:");
+			System.out.println("1 - Email");
+			System.out.println("2 - Telefone");
+			System.out.println("3 - Endereco");
+			int opcao;
+			do{
+				opcao = getInteiro();
+			}while(opcao < 1 || opcao > 3);
+			
+			switch(opcao){
+				case 1:
+					System.out.println("Email Antigo");
+					item = recebeEmail();
+					break;
+				case 2:
+					System.out.println("Telefone Antigo");
+					item = recebeTelefone();
+					break;
+				case 3:
+					System.out.println("Endereco Antigo");
+					item = recebeEndereco();
+					break;
+				default:
+					break;
+			}
+			
+			for(ItemDeContato it : pessoa.getListaDeContatos()){
+				if(it.equals(item)){
+					if(item instanceof Email){
+						System.out.println("Novo Email");
+						Email em = recebeEmail();
+						pessoa.getListaDeContatos().remove(item);
+						pessoa.adicionarContato(em);
+						System.out.println("O contato:\n" + item.exibirContato() + "\nfoi substituido por:\n" + em.exibirContato());
+					}else if(item instanceof Telefone){
+						System.out.println("Novo Telefone");
+						Telefone tf = recebeTelefone();
+						pessoa.getListaDeContatos().remove(item);
+						pessoa.adicionarContato(tf);
+						System.out.println("O contato:\n" + item.exibirContato() + "\nfoi substituido por:\n" + tf.exibirContato());
+					}else if(item instanceof Endereco){
+						System.out.println("Novo Endereco");
+						Endereco ed = recebeEndereco();
+						pessoa.getListaDeContatos().remove(item);
+						pessoa.adicionarContato(ed);
+						System.out.println("O contato:\n" + item.exibirContato() + "\nfoi substituido por:\n" + ed.exibirContato());
 					}
-				}
-				
-				System.out.println("O funcionario " + pessoa.getNome() + " nao tem esse contato.");
-				System.out.println("Deseja adiciona-lo:");
-				System.out.println("1 - Sim");
-				System.out.println("2 - Nao");
-				do{
-					opcao = getInteiro();
-				}while(opcao < 1 || opcao > 2);
-				switch(opcao){
-					case 1:
-						pessoa.adicionarContato(item);
-						System.out.println("Contato adicionado com sucesso.");
-						return;
-					default:
-						break;
+					return;
 				}
 			}
+			adicionaContatoQueFuncionarioNaoTem(pessoa, item);
+		}else{
+			System.out.println("Funcionario nao encontrado no registro.");
 		}
-		System.out.println("Funcionario nao encontrado no registro.");
+		
 	}
 
 	/**
 	 * 
 	 */
 	private static void verificarExistenciaDeContatoDeFuncionario() {
-		System.out.println("Digite o nome do Funcionario:");
-		String nome;
-		do{
-			nome = getString();
-		}while(temNumero(nome));
-		
-		for(Pessoa pessoa : listaContatos.getListaDePessoas()){
-			if(pessoa.getNome().equalsIgnoreCase(nome)){
-				ItemDeContato item = null;
-				System.out.println("Digite o contato a ser procurado:");
-				System.out.println("1 - Email");
-				System.out.println("2 - Telefone");
-				System.out.println("3 - Endereco");
-				int opcao;
-				do{
-					opcao = getInteiro();
-				}while(opcao < 1 || opcao > 3);
-				
-				switch(opcao){
-					case 1:
-						item = recebeEmail();
-						break;
-					case 2:
-						item = recebeTelefone();
-						break;
-					case 3:
-						item = recebeEndereco();
-						break;
-					default:
-						break;
-				}
-				
-				for(ItemDeContato it : pessoa.getListaDeContatos()){
-					if(it.equals(item)){
-						System.out.println("O contato:\n" + it.exibirContato() + "\nja existe para o funcionario: " + pessoa.getNome());
-						return;
-					}
-				}
-				
-				System.out.println("O funcionario " + pessoa.getNome() + " nao tem esse contato.");
-				System.out.println("Deseja adiciona-lo:");
-				System.out.println("1 - Sim");
-				System.out.println("2 - Nao");
-				do{
-					opcao = getInteiro();
-				}while(opcao < 1 || opcao > 2);
-				switch(opcao){
-					case 1:
-						pessoa.adicionarContato(item);
-						System.out.println("Contato adicionado com sucesso.");
-						return;
-					case 2:
-						System.out.println("Contato nao adicionado.");
-						return;
-					default:
-						break;
+		Pessoa pessoa = encontraFuncionario();
+		if(pessoa != null){
+			
+			ItemDeContato item = null;
+			System.out.println("Digite o contato a ser procurado:");
+			System.out.println("1 - Email");
+			System.out.println("2 - Telefone");
+			System.out.println("3 - Endereco");
+			int opcao;
+			do{
+				opcao = getInteiro();
+			}while(opcao < 1 || opcao > 3);
+			
+			switch(opcao){
+				case 1:
+					item = recebeEmail();
+					break;
+				case 2:
+					item = recebeTelefone();
+					break;
+				case 3:
+					item = recebeEndereco();
+					break;
+				default:
+					break;
+			}
+			
+			for(ItemDeContato it : pessoa.getListaDeContatos()){
+				if(it.equals(item)){
+					System.out.println("O contato:\n" + it.exibirContato() + "\nja existe para o funcionario: " + pessoa.getNome());
+					return;
 				}
 			}
+			adicionaContatoQueFuncionarioNaoTem(pessoa, item);
+		}else{
+			System.out.println("Funcionario nao encontrado no registro.");
 		}
-		System.out.println("Funcionario nao encontrado no registro.");
+		
 	}
 	
 	/**
 	 * 
 	 */
 	private static void removerContatoDeFuncionario() {
-		System.out.println("Digite o nome do Funcionario:");
-		String nome;
-		do{
-			nome = getString();
-		}while(temNumero(nome));
-		
-		for(Pessoa pessoa : listaContatos.getListaDePessoas()){
-			if(pessoa.getNome().equalsIgnoreCase(nome)){
-				for(int i=0; i<pessoa.getListaDeContatos().size(); i++){
-					System.out.println((i+1) + " - " + pessoa.getListaDeContatos().get(i).exibirContato());
-				}
-				System.out.println("Deseja remover qual contato:");
-				int opcao;
-				
-				do{
-					opcao = getInteiro();
-				}while(opcao < 1 || opcao > pessoa.getListaDeContatos().size());
-
-				pessoa.getListaDeContatos().remove(opcao-1);
-				System.out.println("Contato de " + pessoa.getNome() + " removido com sucesso.");
-				if(pessoa.getListaDeContatos().isEmpty()){
-					listaContatos.getListaDePessoas().remove(pessoa);
-					System.out.println("Lista de Contatos de " + pessoa.getNome() + " vazia.\nFuncionario removido do sistema.");
-				}
-				return;
+		Pessoa pessoa = encontraFuncionario();
+		if(pessoa != null){
+			for(int i=0; i<pessoa.getListaDeContatos().size(); i++){
+				System.out.println((i+1) + " - " + pessoa.getListaDeContatos().get(i).exibirContato());
 			}
+			System.out.println("Deseja remover qual contato:");
+			int opcao;
+			
+			do{
+				opcao = getInteiro();
+			}while(opcao < 1 || opcao > pessoa.getListaDeContatos().size());
+
+			pessoa.getListaDeContatos().remove(opcao-1);
+			System.out.println("Contato de " + pessoa.getNome() + " removido com sucesso.");
+			if(pessoa.getListaDeContatos().isEmpty()){
+				listaContatos.getListaDePessoas().remove(pessoa);
+				System.out.println("Lista de Contatos de " + pessoa.getNome() + " vazia.\nFuncionario removido do sistema.");
+			}
+		}else{
+			System.out.println("Funcionario nao encontrado no registro.");
 		}
-		System.out.println("Funcionario nao encontrado no registro.");
 	}
 	
 	/**
 	 * 
 	 */
 	private static void removerFuncionario() {
-		System.out.println("Digite o nome do Funcionario:");
-		String nome;
-		do{
-			nome = getString();
-		}while(temNumero(nome));
-		
-		for(Pessoa pessoa : listaContatos.getListaDePessoas()){
-			if(pessoa.getNome().equalsIgnoreCase(nome)){
-				listaContatos.getListaDePessoas().remove(pessoa);
-				System.out.println("Funcionario removido com sucesso.");
-				return;
-			}
+		Pessoa pessoa = encontraFuncionario();
+		if(pessoa != null){
+			listaContatos.getListaDePessoas().remove(pessoa);
+			System.out.println("Funcionario removido com sucesso.");
+		}else{
+			System.out.println("Funcionario nao encontrado no registro.");
 		}
-		System.out.println("Funcionario nao encontrado no registro.");
 	}
 
 	/**
@@ -369,13 +343,31 @@ public class Main {
 			opcao = getInteiro();
 			switch(opcao){
 				case 1:
-					contatos.add(recebeEmail());
+					Email email = recebeEmail();
+					if(!contatos.contains(email)){
+						contatos.add(email);
+						System.out.println("Email cadastrado com sucesso.");
+					}
+					else
+						System.out.println(email.exibirContato() + " ja cadastrado.");
 					break;
 				case 2:
-					contatos.add(recebeTelefone());
+					Telefone telefone = recebeTelefone();
+					if(!contatos.contains(telefone)){
+						contatos.add(telefone);
+						System.out.println("Telefone cadastrado com sucesso.");
+					}
+					else
+						System.out.println(telefone.exibirContato() + " ja cadastrado.");
 					break;
 				case 3:
-					contatos.add(recebeEndereco());
+					Endereco endereco = recebeEndereco();
+					if(!contatos.contains(endereco)){
+						contatos.add(endereco);
+						System.out.println("Endereco cadastrado com sucesso.");
+					}
+					else
+						System.out.println(endereco.exibirContato() + "\n--ja cadastrado.");
 					break;
 				case 4:
 					if(contatos.isEmpty()){
@@ -518,6 +510,52 @@ public class Main {
 			}
 		}
 		return false;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	private static Pessoa encontraFuncionario(){
+		System.out.println("Digite o nome do Funcionario:");
+		String nome;
+		do{
+			nome = getString();
+		}while(temNumero(nome));
+		
+		for(Pessoa pessoa : listaContatos.getListaDePessoas()){
+			if(pessoa.getNome().equalsIgnoreCase(nome)){
+				return pessoa;
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @param pessoa
+	 * @param item
+	 */
+	private static void adicionaContatoQueFuncionarioNaoTem(Pessoa pessoa, ItemDeContato item){
+		int opcao;
+		System.out.println("O funcionario " + pessoa.getNome() + " nao tem esse contato.");
+		System.out.println("Deseja adiciona-lo:");
+		System.out.println("1 - Sim");
+		System.out.println("2 - Nao");
+		do{
+			opcao = getInteiro();
+		}while(opcao < 1 || opcao > 2);
+		switch(opcao){
+			case 1:
+				pessoa.adicionarContato(item);
+				System.out.println("Contato adicionado com sucesso.");
+				return;
+			case 2:
+				System.out.println("Contato nao adicionado.");
+				return;
+			default:
+				break;
+		}
 	}
 
 }

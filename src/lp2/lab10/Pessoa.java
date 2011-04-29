@@ -24,7 +24,7 @@ public class Pessoa implements Cidadao, Contribuinte {
 
 	@Override
 	public double pagaIR() {
-		if (salario <= 1500)
+		if (salario >= 0 && salario <= 1500)
 			return 0;
 		else if (salario >= 1500.01 && salario <= 3000.00)
 			return 0.15 * salario;
