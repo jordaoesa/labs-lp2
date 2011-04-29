@@ -30,15 +30,13 @@ public class Telefone implements ItemDeContato {
 	}
 
 	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+		if(checaTelefone(telefone)){
+			this.telefone = telefone;
+		}
 	}
 
 	public boolean checaTelefone(String telefone) {
 		return telefone.matches("\\d\\d\\-\\d\\d\\-\\d\\d\\d\\d\\d\\d\\d\\d");
 	}
-
-	// public static void main(String[] args) {
-	// Telefone t = new Telefone();
-	// System.out.println(t.checaTelefone("55-83-99081560"));
-	// }
+	
 }

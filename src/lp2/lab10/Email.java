@@ -33,16 +33,13 @@ public class Email implements ItemDeContato {
 	}
 
 	public void setEmail(String email) {
-		this.email = email;
+		if(checaEmail(email)){
+			this.email = email;
+		}
 	}
 
 	public boolean checaEmail(String email) {
-		return email.matches("[a-zA-Z_\\.]*@[a-z]*\\.[a-z]*");
+		return email.matches("[a-zA-Z0-9_\\.]*@[a-zA-Z0-9\\.]*");
 	}
-
-//	public static void main(String[] args) {
-//		Email e = new Email();
-//		System.out.println(e.checaEmail("jo.r_d._o@jordao.com"));
-//	}
 
 }

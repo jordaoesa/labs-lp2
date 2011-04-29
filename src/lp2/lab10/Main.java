@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * 
+ * @author jordaoesa
+ *
+ */
 public class Main {
 	
 	private static ListaContatos listaContatos = new ListaContatos();
@@ -15,7 +20,10 @@ public class Main {
 		recebeDadosIniciais();
 	}
 	
-	public static void menuPrincipal(){
+	/**
+	 * 
+	 */
+	private static void menuPrincipal(){
 		System.out.println("=====================================================");
 		System.out.println("|1 - Cadastrar Funcionario                          |");
 		System.out.println("|2 - Remover Funcionario                            |");
@@ -23,12 +31,15 @@ public class Main {
 		System.out.println("|4 - Verificar Existencia de Contato de Funcionario |");
 		System.out.println("|5 - Substituir Contato de Funcionario              |");
 		System.out.println("|6 - Obter Contatos de Funcionario                  |");
-		System.out.println("|7 - Pessoas Cadastradas                            |");
+		System.out.println("|7 - Funcionarios Cadastrados                       |");
 		System.out.println("|8 - Sair                                           |");
 		System.out.println("=====================================================");
 	}
 	
-	public static void recebeDadosIniciais(){
+	/**
+	 * 
+	 */
+	private static void recebeDadosIniciais(){
 		int opcao = 8;
 		
 		do{
@@ -63,6 +74,9 @@ public class Main {
 		}while(opcao != 8);
 	}
 	
+	/**
+	 * 
+	 */
 	private static void pessoasCadastradas() {
 		if(listaContatos.nomePessoasCadastradas().isEmpty()){
 			System.out.println("Nao ha funcionarios cadastrados no registro.");
@@ -74,6 +88,9 @@ public class Main {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	private static void obterContatosDeFuncionario() {
 		System.out.println("Digite o nome do Funcionario:");
 		String nome;
@@ -92,6 +109,9 @@ public class Main {
 		System.out.println("Funcionario nao encontrado no registro.");
 	}
 
+	/**
+	 * 
+	 */
 	private static void substituirContatoDeFuncionario() {
 		System.out.println("Digite o nome do Funcionario:");
 		String nome;
@@ -173,6 +193,9 @@ public class Main {
 		System.out.println("Funcionario nao encontrado no registro.");
 	}
 
+	/**
+	 * 
+	 */
 	private static void verificarExistenciaDeContatoDeFuncionario() {
 		System.out.println("Digite o nome do Funcionario:");
 		String nome;
@@ -236,6 +259,9 @@ public class Main {
 		System.out.println("Funcionario nao encontrado no registro.");
 	}
 	
+	/**
+	 * 
+	 */
 	private static void removerContatoDeFuncionario() {
 		System.out.println("Digite o nome do Funcionario:");
 		String nome;
@@ -267,6 +293,9 @@ public class Main {
 		System.out.println("Funcionario nao encontrado no registro.");
 	}
 	
+	/**
+	 * 
+	 */
 	private static void removerFuncionario() {
 		System.out.println("Digite o nome do Funcionario:");
 		String nome;
@@ -284,6 +313,9 @@ public class Main {
 		System.out.println("Funcionario nao encontrado no registro.");
 	}
 
+	/**
+	 * 
+	 */
 	private static void cadastrarFuncionario() {
 		System.out.println("Digite o Nome:");
 		String nome;
@@ -299,7 +331,7 @@ public class Main {
 		String cpf;
 		do{
 			cpf = getString();
-		}while(!cpf.matches("[0-9]*"));
+		}while(!Pessoa.verificaCPF(cpf));
 		System.out.println("Digite a Idade:");
 		int idade;
 		do{
@@ -321,6 +353,10 @@ public class Main {
 		}
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	private static List<ItemDeContato> getContatosFunc() {
 		List<ItemDeContato> contatos = new ArrayList<ItemDeContato>();
 		
@@ -356,6 +392,10 @@ public class Main {
 		return contatos;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	private static Email recebeEmail() {
 		Email email = new Email();
 		System.out.println("Digite o email:");
@@ -367,6 +407,10 @@ public class Main {
 		return email;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	private static Telefone recebeTelefone(){
 		Telefone telefone = new Telefone();
 		System.out.println("Digite o telefone: [ex: 55-83-99999999]");
@@ -378,6 +422,10 @@ public class Main {
 		return telefone;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	private static Endereco recebeEndereco(){
 		System.out.println("Digite a rua:");
 		String rua = getString();
@@ -471,5 +519,61 @@ public class Main {
 		}
 		return false;
 	}
+	
+//	private static boolean verificaCPF(String cpf) {
+//
+//		int decimo, decimoPrimeiro, soma = 0, mult = 10, resto;
+//		int cpfInt[] = new int[11];
+//
+//		if (cpf.length() < 11 || cpf.length() > 11 || contaDigitos(cpf) < 11) {
+//			return false;
+//		}
+//
+//		for (int i = 0; i < 11; i++) {
+//			cpfInt[i] = Integer.parseInt(String.valueOf(cpf.charAt(i)));
+//		}
+//
+//		// Verifica decimo digito
+//		for (int i = 0; i < 9; i++) {
+//			soma += (mult * cpfInt[i]);
+//			mult--;
+//		}
+//
+//		resto = soma % 11;
+//		decimo = (resto == 0 || resto == 1) ? 0 : 11 - resto;
+//
+//		if (decimo == cpfInt[9]) {
+//
+//			mult = 11;
+//			soma = 0;
+//
+//			// Verifica o decimo-primeiro digito
+//			for (int i = 0; i < 10; i++) {
+//				soma += (mult * cpfInt[i]);
+//				mult--;
+//			}
+//
+//			resto = soma % 11;
+//			decimoPrimeiro = (resto == 0 || resto == 1) ? 0 : 11 - resto;
+//
+//			if (decimoPrimeiro == cpfInt[10]) {
+//				return true;
+//			}
+//
+//		}
+//
+//		return false;
+//	}
+//	
+//	// Metodo que conta quantos digitos existem em uma variavel String
+//    private static int contaDigitos(String numero) {
+//        int contador = 0;
+//        for (int i = 0; i < numero.length(); i++) {
+//            if (numero.charAt(i) >= '0' && numero.charAt(i) <= '9') {
+//                contador++;
+//            }
+//        }
+//        return contador;
+//    }
 
 }
