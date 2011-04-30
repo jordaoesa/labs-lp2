@@ -12,8 +12,19 @@ package lp2.lab10;
  */
 public interface Contribuinte {
 
+	/**
+	 * Metodo responsavel por verificar quanto um Contribuinte dve pagar de
+	 * Imposto de Renda.
+	 * 
+	 * @return O valor a ser pago.
+	 */
 	public double pagaIR();
 
+	/**
+	 * Metodo que retorna o CPF do Cidadao.
+	 * 
+	 * @return O CPF do Cidadao.
+	 */
 	public String getCPF();
 
 }

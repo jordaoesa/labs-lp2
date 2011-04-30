@@ -12,8 +12,18 @@ package lp2.lab10;
  */
 public interface Cidadao {
 
+	/**
+	 * Metodo responsavel por verificar se um dado Cidadao esta apto a votar.
+	 * 
+	 * @return Retorna true se o cidadao poder votar e false caso contrario.
+	 */
 	public boolean vota();
 
+	/**
+	 * Metodo que retorna o RG de um cidadao.
+	 * 
+	 * @return O RG do cidadao.
+	 */
 	public String getRG();
 
 }
