@@ -144,7 +144,7 @@ public class Main {
 	private static void valorDoImpostoDeRendaDeFuncionario() {
 		Pessoa pessoa = encontraFuncionario();
 		if (pessoa != null) {
-			System.out.println("O Funcionario " + pessoa.getNome() + " Paga "
+			System.out.println("O Funcionario " + pessoa.getNome() + " Paga R$ "
 					+ pessoa.pagaIR() + " De Imposto De Renda.");
 		} else {
 			System.out.println("Funcionario nao encontrado no registro.");
