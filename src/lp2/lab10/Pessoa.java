@@ -214,7 +214,7 @@ public class Pessoa implements Cidadao, Contribuinte {
 
 	/**
 	 * Adiciona um novo contato a lista de contatos da pessoa caso este ja nao
-	 * esteja la e tbm ele seja valido.
+	 * esteja la e tambem ele seja valido.
 	 * 
 	 * @param novoContato
 	 *            O novo contato.
