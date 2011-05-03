@@ -81,7 +81,7 @@ public class Email implements ItemDeContato {
 	 * @return Retorna true caso seja valido o email e false caso contrario.
 	 */
 	public boolean checaEmail(String email) {
-		return email.matches("[a-zA-Z0-9]+[-_\\.]*@[a-zA-Z0-9]+[\\.]+[a-zA-Z0-9\\.]+");
+		return email.matches("[a-zA-Z0-9]+[a-zA-Z0-9-_\\.]*@[a-zA-Z0-9]+[\\.]+[a-zA-Z0-9\\.]+");
 	}
 	
 }
